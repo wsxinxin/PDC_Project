@@ -1,0 +1,8 @@
+Hello PDC Assignment 1 Markers
+Here is a basic ReadMe for our project
+First run the GameMenu
+It will state that there is an already loaded game state, thats because during testing we made one, if you delete that and save it will create a new one
+Press m to open the menu, select any of the following options, perferrably starting with Show Map as you are marked as a 'P' on the grid. Press M again to re-enter another selection.
+By selecting the Move option, you will move a space and enter battle, after the battle press M again to see if you were lucky to have any loot drop. Press M again to open the Map to see the area you have cleared, marked 'X'.
+Thats all for a quick guide on how to use this program.
+Thank you from Andrew and Christian.
