@@ -27,7 +27,7 @@ public class Drops extends Mobs{
         if(getMobHealth() == 0 || getMobHealth() <= 0)
         {
             lootDrop();
-            System.out.println("You aReceived "+items+ "item called: " +this.dropName);
+            System.out.println("You Received "+items+ "item called: " +this.dropName);
         } 
     }
 }
