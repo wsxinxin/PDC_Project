@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  *
  * @author chris
  */
-public class GamePanel extends JPanel implements Runnable{
+public class GameWorldPanel extends JPanel implements Runnable{
    
     //SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
     int playerY = 100;
     int playerSpeed = 4;
     
-    public GamePanel(){
+    public GameWorldPanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
         this.setBackground(Color.black); //set the colors of the screeen
         this.setDoubleBuffered(true); // Buffer

@@ -10,24 +10,21 @@ package game.main;
  */
 
 import javax.swing.JFrame;
-import game.window.GamePanel;
+import game.window.GameMenuPanel;
 
 public class GameWindow {
 
     public static void main(String[] args) {
-        JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
-        window.setTitle("PDC_RPGGAME");
+        // Create a JFrame to hold the GameStartPanel
+        JFrame frame = new JFrame("Game Menu");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 200);
 
-        GamePanel gamePanel = new GamePanel();
-        window.add(gamePanel);
+        // Create the GameStartPanel and add it to the JFrame
+        GameMenuPanel gameStartPanel = new GameMenuPanel();
+        frame.add(gameStartPanel);
 
-        window.pack();
-
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-
-        gamePanel.startGameThread(); // Start the game loop
+        // Make the JFrame visible
+        frame.setVisible(true);
     }
 }
