@@ -10,7 +10,7 @@ package game.main;
  */
 
 import javax.swing.JFrame;
-import game.window.GameMenuPanel;
+import game.window.GameStartPanel;
 
 public class GameWindow {
 
@@ -21,7 +21,7 @@ public class GameWindow {
         frame.setSize(400, 200);
 
         // Create the GameStartPanel and add it to the JFrame
-        GameMenuPanel gameStartPanel = new GameMenuPanel();
+        GameStartPanel gameStartPanel = new GameStartPanel();
         frame.add(gameStartPanel);
 
         // Make the JFrame visible

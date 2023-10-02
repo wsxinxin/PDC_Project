@@ -11,7 +11,10 @@ import java.awt.event.*;
  * @author chris
  */
 public class KeyHandler implements KeyListener{
-    
+
+    public KeyHandler(GameWorldPanel aThis) {
+    }
+
     public boolean upPressed, downPressed, leftPressed, rightPressed;
 
     @Override
@@ -53,6 +56,5 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_D){
             rightPressed = false;
         }
-    }
-    
+    }   
 }

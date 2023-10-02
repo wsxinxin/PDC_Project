@@ -5,13 +5,14 @@
 package game.window;
 
 import java.awt.*;
-import javax.swing.JPanel;
+import java.awt.event.*;
+import javax.swing.*;
 
 /**
  *
  * @author chris
  */
-public class GameWorldPanel extends JPanel implements Runnable{
+public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
    
     //SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
@@ -25,8 +26,9 @@ public class GameWorldPanel extends JPanel implements Runnable{
     
     // FPS = Frames Per Second
     int FPS = 60;
-            
-    KeyHandler keyH = new KeyHandler();
+    
+    GameMenuPanel gmp;
+    KeyHandler keyH;
     Thread gameThread; 
     
     // set player's default position
@@ -38,8 +40,27 @@ public class GameWorldPanel extends JPanel implements Runnable{
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
         this.setBackground(Color.black); //set the colors of the screeen
         this.setDoubleBuffered(true); // Buffer
-        this.addKeyListener(keyH);
+        // Initialize the KeyHandler
+        keyH = new KeyHandler(this);
+        // Add the KeyHandler as a key listener
+        addKeyListener(keyH);
         this.setFocusable(true);
+        
+        /*// Create an InputMap and ActionMap for key bindings
+        InputMap inputMap = this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = this.getActionMap();
+
+        // Bind the Escape key to a custom action
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "showMenu");
+        actionMap.put("showMenu", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                executeGameMenu();
+            }
+        });*/
+        // Add the KeyListener to the GameWorldPanel
+        addKeyListener(this);
+        setFocusable(true);
     }
 
     public void startGameThread(){
@@ -108,4 +129,33 @@ public class GameWorldPanel extends JPanel implements Runnable{
         
         g2.dispose();
     }
+    
+    public void executeGameMenu() {
+        // Create a JDialog to display the menu panel
+        JFrame frame = new JFrame("Menu");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(300, 200);
+
+        gmp = new GameMenuPanel();
+        frame.add(gmp);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        
+        int code = ke.getKeyCode();
+        if (code == KeyEvent.VK_ESCAPE) {
+            executeGameMenu(); // Call a method in your GameMenuPanel class to execute the menu
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+    }  
 }
