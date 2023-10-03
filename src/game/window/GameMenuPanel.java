@@ -17,8 +17,13 @@ public class GameMenuPanel extends JPanel {
     private JButton saveButton;
     private JButton loadButton;
     private JButton quitButton;
-   
-    public GameMenuPanel() {
+
+    // Reference to the JFrame that contains this panel
+    private JFrame parentFrame; // It is being used but NetBeans do not recognize it until remove it.
+
+    public GameMenuPanel(JFrame parentFrame) {
+        this.parentFrame = parentFrame; // Store the reference to the parent frame
+
         // Set the layout for the panel
         setLayout(new GridLayout(4, 1, 10, 10)); // 4 rows, 1 column, 10px vertical and horizontal gap
         setOpaque(false); // Make the panel transparent
@@ -35,12 +40,25 @@ public class GameMenuPanel extends JPanel {
         add(loadButton);
         add(quitButton);
 
-        // Add action listeners to the buttons (unchanged from previous code)
-
-        // Create a KeyHandler and add it as a key listener to this panel
-
-        setFocusable(true);
-        requestFocusInWindow();
+        // Add action listeners to the buttons
+        resumeButton.addActionListener((ActionEvent e) -> {
+            // Close the parent JFrame when "Resume Game" is clicked
+            parentFrame.dispose();
+        });
+        
+        saveButton.addActionListener((ActionEvent e) -> {
+            // Save the Game State when "Save Game" is clicked
+        });
+        
+        loadButton.addActionListener((ActionEvent e) ->{
+            // Load an existent Game Save when "Load Game" is clicked
+        });
+        
+        quitButton.addActionListener((ActionEvent e) ->{
+            // code to quit the game here
+            System.exit(0);
+        });
+        
     }
 
     @Override

@@ -31,8 +31,11 @@ public class GameStartPanel extends JPanel {
     final int maxScreenRow = 12; //results in a 4:3 ratio
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     final int screenHeight = tileSize * maxScreenRow; // 576 pixels
+    
+    private JFrame mainframe;
         
-    public GameStartPanel(){
+    public GameStartPanel(JFrame mainframe){
+        this.mainframe = mainframe;
         // Set layout to a BorderLayout
         setLayout(new BorderLayout());
         
@@ -48,6 +51,7 @@ public class GameStartPanel extends JPanel {
                 // Add code to start a new game here
                 JOptionPane.showMessageDialog(null, "Starting a new game!");
                 startGame();
+                mainframe.dispose();
             }
         });
         
@@ -67,7 +71,7 @@ public class GameStartPanel extends JPanel {
         quitGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add code to quit the game here
+                // code to quit the game here
                 System.exit(0);
             }
         });

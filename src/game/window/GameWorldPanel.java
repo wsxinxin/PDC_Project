@@ -131,15 +131,16 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     }
     
     public void executeGameMenu() {
-        // Create a JDialog to display the menu panel
+        // Create a JFrame to display the menu panel
         JFrame frame = new JFrame("Menu");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(300, 200);
 
-        gmp = new GameMenuPanel();
+        gmp = new GameMenuPanel(frame);
         frame.add(gmp);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        
     }
 
     @Override

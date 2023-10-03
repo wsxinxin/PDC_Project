@@ -21,7 +21,7 @@ public class GameWindow {
         frame.setSize(400, 200);
 
         // Create the GameStartPanel and add it to the JFrame
-        GameStartPanel gameStartPanel = new GameStartPanel();
+        GameStartPanel gameStartPanel = new GameStartPanel(frame);
         frame.add(gameStartPanel);
 
         // Make the JFrame visible
