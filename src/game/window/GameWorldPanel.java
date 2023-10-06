@@ -4,6 +4,7 @@
  */
 package game.window;
 
+import game.entity.Player;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
     
-    final int tileSize = originalTileSize * scale; // 48x48 tile
+    public final int tileSize = originalTileSize * scale; // 48x48 tile
     final int maxScreenCol = 16; //results in a 4:3 ratio
     final int maxScreenRow = 12; //results in a 4:3 ratio
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
@@ -32,11 +33,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     GameBattlePanel gbp;
     KeyHandler keyH;
     Thread gameThread; 
-    
-    // set player's default position
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
+    Player player;
     
     public GameWorldPanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
@@ -44,23 +41,11 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         this.setDoubleBuffered(true); // Buffer
         // Initialize the KeyHandler
         keyH = new KeyHandler(this);
+        player = new Player(this, keyH);
         // Add the KeyHandler as a key listener
         addKeyListener(keyH);
         this.setFocusable(true);
         
-        /*// Create an InputMap and ActionMap for key bindings
-        InputMap inputMap = this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        ActionMap actionMap = this.getActionMap();
-
-        // Bind the Escape key to a custom action
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "showMenu");
-        actionMap.put("showMenu", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                executeGameMenu();
-            }
-        });*/
-        // Add the KeyListener to the GameWorldPanel
         addKeyListener(this);
         setFocusable(true);
     }
@@ -105,18 +90,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     
     public void update() {
         
-        if (keyH.upPressed == true) {
-            playerY -= playerSpeed;
-        }
-        else if (keyH.downPressed == true) {
-            playerY += playerSpeed;
-        }
-        else if (keyH.leftPressed == true) {
-            playerX -= playerSpeed;
-        }
-        else if (keyH.rightPressed == true) {
-            playerX += playerSpeed;
-        }
+        player.update();
     }
     
     public void paintComponent(Graphics g) {
@@ -125,9 +99,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         
         Graphics2D g2 = (Graphics2D)g; // convert Graphics java claas to Graphics2D class which has more functions
         
-        g2.setColor(Color.white);
-        
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+        player.draw(g2);
         
         g2.dispose();
     }
