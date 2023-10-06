@@ -27,7 +27,9 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     // FPS = Frames Per Second
     int FPS = 60;
     
+    // Instanciations
     GameMenuPanel gmp;
+    GameBattlePanel gbp;
     KeyHandler keyH;
     Thread gameThread; 
     
@@ -139,8 +141,22 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         gmp = new GameMenuPanel(frame);
         frame.add(gmp);
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        frame.setVisible(true);   
+    }
+    
+    public void executeGameBattle() {
+        // Create a JFrame to display the game battle 
+        JFrame frame = new JFrame("Game Battle");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setResizable(false);
         
+        gbp = new GameBattlePanel();
+        frame.add(gbp);
+        
+        frame.pack();
+        
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);   
     }
 
     @Override
@@ -152,7 +168,11 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         
         int code = ke.getKeyCode();
         if (code == KeyEvent.VK_ESCAPE) {
-            executeGameMenu(); // Call a method in your GameMenuPanel class to execute the menu
+            executeGameMenu(); // Call the method to execute the menu
+        }
+        
+        else if (code == KeyEvent.VK_ENTER){
+            executeGameBattle(); // Call the method to execute the Battle 
         }
     }
 

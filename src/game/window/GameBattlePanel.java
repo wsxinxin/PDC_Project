@@ -5,8 +5,12 @@
 package game.window;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -29,9 +33,65 @@ public class GameBattlePanel extends JPanel{
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     final int screenHeight = tileSize * maxScreenRow; // 576 pixels
     
-        // Constructor for GameBattlePanel
+    // Constructor for GameBattlePanel
     public GameBattlePanel() {
         
-    }
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setBackground(Color.black);
+        this.setDoubleBuffered(true);
 
+        // Create a JPanel to hold the buttons in a 2x2 grid layout at the bottom
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
+        
+        // Create the Attack button
+        JButton attackButton = new JButton("Attack");
+        attackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle Attack button click
+            }
+        });
+        buttonPanel.add(attackButton);
+
+        // Create the Open Inventory button
+        JButton inventoryButton = new JButton("Open Inventory");
+        inventoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle Inventory button click
+            }
+        });
+        buttonPanel.add(inventoryButton);
+
+        // Create the Finish Turn button
+        JButton finishTurnButton = new JButton("Finish Turn");
+        finishTurnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle Finish Turn button click
+            }
+        });
+        buttonPanel.add(finishTurnButton);
+
+        // Create the Retreat button
+        JButton retreatButton = new JButton("Retreat");
+        retreatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle Retreat button click
+            }
+        });
+        buttonPanel.add(retreatButton);
+
+        // Add the button panel to the bottom of the GameBattlePanel
+        this.setLayout(new BorderLayout());
+        this.add(buttonPanel, BorderLayout.SOUTH);
+    
+    }
+    
+    public void paintComponent(Graphics g) {
+        
+        super.paintComponent(g);
+               
+    }
 }
