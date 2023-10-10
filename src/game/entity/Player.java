@@ -38,13 +38,13 @@ public final class Player extends Entity{
     public void getPlayerImage(){
         
         try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0001.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0001.png"));
             //up2 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0001.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0004.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0004.png"));
             //down2 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0001.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0003.png"));       
+            left1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0003.png"));       
             //left2 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0001.png"));       
-            right1 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0002.png"));      
+            right1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0002.png"));      
             //right2 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0001.png"));     
         } catch (IOException e){
             e.printStackTrace();

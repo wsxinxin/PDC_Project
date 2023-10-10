@@ -20,7 +20,7 @@ public class gameCreateDatabase
     private final Connection conn;
     private Statement statement;
 
-    public GameWorldPanel() {
+    public gameCreateDatabase() {
         dbManager = new gameDBManager();
         conn = dbManager.getConnection();
     }

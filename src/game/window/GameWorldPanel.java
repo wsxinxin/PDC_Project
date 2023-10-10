@@ -5,6 +5,7 @@
 package game.window;
 
 import game.entity.Player;
+import game.tile.TileManager;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -29,6 +30,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     int FPS = 60;
     
     // Instanciations
+    TileManager tileM;
     GameMenuPanel gmp;
     GameBattlePanel gbp;
     KeyHandler keyH;
@@ -40,6 +42,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         this.setBackground(Color.black); //set the colors of the screeen
         this.setDoubleBuffered(true); // Buffer
         // Initialize the KeyHandler
+        tileM  = new TileManager(this);
         keyH = new KeyHandler(this);
         player = new Player(this, keyH);
         // Add the KeyHandler as a key listener
@@ -98,6 +101,8 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         super.paintComponent(g);
         
         Graphics2D g2 = (Graphics2D)g; // convert Graphics java claas to Graphics2D class which has more functions
+        
+        tileM.draw(g2);
         
         player.draw(g2);
         

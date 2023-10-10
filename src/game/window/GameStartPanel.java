@@ -8,9 +8,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,11 +28,8 @@ public class GameStartPanel extends JPanel {
     final int maxScreenRow = 12; //results in a 4:3 ratio
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     final int screenHeight = tileSize * maxScreenRow; // 576 pixels
-    
-    private JFrame mainframe;
         
     public GameStartPanel(JFrame mainframe){
-        this.mainframe = mainframe;
         // Set layout to a BorderLayout
         setLayout(new BorderLayout());
         
@@ -45,35 +39,26 @@ public class GameStartPanel extends JPanel {
         
         // Create Start Game button
         JButton startGameButton = new JButton("Start Game");
-        startGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Add code to start a new game here
-                JOptionPane.showMessageDialog(null, "Starting a new game!");
-                startGame();
-                mainframe.dispose();
-            }
+        startGameButton.addActionListener((ActionEvent e) -> {
+            // Add code to start a new game here
+            JOptionPane.showMessageDialog(null, "Starting a new game!");
+            startGame();
+            mainframe.dispose();
         });
         
         // Create Load Game button
         JButton loadGameButton = new JButton("Load Game");
-        loadGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Add code to load a saved game here
-                JOptionPane.showMessageDialog(null, "Loading a saved game!");
-                // TO BE IMPLEMENTED
-            }
+        loadGameButton.addActionListener((ActionEvent e) -> {
+            // Add code to load a saved game here
+            JOptionPane.showMessageDialog(null, "Loading a saved game!");
+            // TO BE IMPLEMENTED
         });
         
         // Create Quit Game button
         JButton quitGameButton = new JButton("Quit Game");
-        quitGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // code to quit the game here
-                System.exit(0);
-            }
+        quitGameButton.addActionListener((ActionEvent e) -> {
+            // code to quit the game here
+            System.exit(0);
         });
         
         // Add buttons to the button panel
