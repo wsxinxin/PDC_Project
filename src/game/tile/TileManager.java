@@ -71,15 +71,82 @@ public class TileManager {
                 g2.drawImage(tile[0].image, x, y, tileSize, tileSize, null);
             }
         }
+        
+        //Infected_grass city 1
+        g2.drawImage(tile[1].image, 528,0, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[2].image, 576,0, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[2].image, 624,0, gwp.tileSize, gwp.tileSize, null);
+        
+        g2.drawImage(tile[2].image, 480,48, gwp.tileSize, gwp.tileSize, null);        
+        g2.drawImage(tile[1].image, 528,48, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[1].image, 576,48, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[2].image, 624,48, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[2].image, 672,48, gwp.tileSize, gwp.tileSize, null);
+        
+        g2.drawImage(tile[1].image, 432,96, gwp.tileSize, gwp.tileSize, null);        
+        g2.drawImage(tile[2].image, 480,96, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[2].image, 528,96, gwp.tileSize, gwp.tileSize, null);
+
+        g2.drawImage(tile[1].image, 480,144, gwp.tileSize, gwp.tileSize, null);        
+        g2.drawImage(tile[1].image, 528,144, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[2].image, 576,144, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[2].image, 624,144, gwp.tileSize, gwp.tileSize, null);        
+        
+        //Infected_grass city 2
+        g2.drawImage(tile[2].image, 240,432, gwp.tileSize, gwp.tileSize, null);        
+        g2.drawImage(tile[2].image, 288,432, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[1].image, 336,432, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[1].image, 384,432, gwp.tileSize, gwp.tileSize, null); 
+        
+        g2.drawImage(tile[2].image, 288,480, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[1].image, 336,480, gwp.tileSize, gwp.tileSize, null);     
+        
         //Ruined Cities
+        g2.drawImage(tile[7].image, 528,48, gwp.tileSize, gwp.tileSize, null);
         g2.drawImage(tile[7].image, 576,48, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 624,48, gwp.tileSize, gwp.tileSize, null);        
+        g2.drawImage(tile[7].image, 480,96, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 528,96, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 528,144, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 576,144, gwp.tileSize, gwp.tileSize, null);
+        
         g2.drawImage(tile[7].image, 288,432, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 336,432, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 288,480, gwp.tileSize, gwp.tileSize, null);
     
         //Water (River, lakes, sea)
+        g2.drawImage(tile[8].image, 0,0, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 0,48, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 0,96, gwp.tileSize, gwp.tileSize, null);
         
+        g2.drawImage(tile[8].image, 0,144, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 48,144, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 96,144, gwp.tileSize, gwp.tileSize, null);
+
+        g2.drawImage(tile[8].image, 96,192, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 144,192, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 192,192, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 240,192, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 288,192, gwp.tileSize, gwp.tileSize, null);
+
+        g2.drawImage(tile[3].image, 288,240, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[3].image, 336,240, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[3].image, 384,240, gwp.tileSize, gwp.tileSize, null);
+        
+        g2.drawImage(tile[3].image, 384,288, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[3].image, 432,288, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[3].image, 480,288, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 528,288, gwp.tileSize, gwp.tileSize, null);
+        
+        g2.drawImage(tile[8].image, 528,336, gwp.tileSize, gwp.tileSize, null);
+ 
+        g2.drawImage(tile[8].image, 576,336, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 576,384, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 576,432, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 576,480, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[8].image, 576,528, gwp.tileSize, gwp.tileSize, null);
+
         //roads
-        
-        //polluted areas 
         
         /*//row 1
         g2.drawImage(tile[0].image, 0,0, gwp.tileSize, gwp.tileSize, null);
