@@ -19,7 +19,7 @@ public class TileManager {
 
     public TileManager(GameWorldPanel gwp) {
         this.gwp = gwp;
-        tile = new Tile[10];
+        tile = new Tile[20];
         
         getTileImage();
     }
@@ -28,31 +28,37 @@ public class TileManager {
         
         try {
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/grass.png"));
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/grass.png"));
             
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/infected_grass-0001.png"));
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0001.png"));
             
             tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/infected_grass-0002.png"));
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0002.png"));
             
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/polluted_water.png"));
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/polluted_water.png"));
             
             tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/road-0001.png"));
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/road-0001.png"));
             
             tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/road-0002.png"));
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/road-0002.png"));
             
             tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/road-0003.png"));
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/road-0003.png"));
             
             tile[7] = new Tile();
-            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/ruines-0001.png"));
+            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/ruines-0001.png"));
             
             tile[8] = new Tile();
-            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/worldTiles/water.png"));
+            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water.png"));
+            
+            tile[9] = new Tile();
+            tile[9].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-transition-0001.png"));
+            
+            tile[10] = new Tile();
+            tile[10].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-transition-0002.png"));
             
         } catch(IOException e){
             e.printStackTrace();
@@ -127,9 +133,9 @@ public class TileManager {
         g2.drawImage(tile[8].image, 144,192, gwp.tileSize, gwp.tileSize, null);
         g2.drawImage(tile[8].image, 192,192, gwp.tileSize, gwp.tileSize, null);
         g2.drawImage(tile[8].image, 240,192, gwp.tileSize, gwp.tileSize, null);
-        g2.drawImage(tile[8].image, 288,192, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[10].image, 288,192, gwp.tileSize, gwp.tileSize, null);
 
-        g2.drawImage(tile[3].image, 288,240, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[9].image, 288,240, gwp.tileSize, gwp.tileSize, null);
         g2.drawImage(tile[3].image, 336,240, gwp.tileSize, gwp.tileSize, null);
         g2.drawImage(tile[3].image, 384,240, gwp.tileSize, gwp.tileSize, null);
         
