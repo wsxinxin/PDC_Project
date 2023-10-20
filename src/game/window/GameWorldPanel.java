@@ -5,6 +5,7 @@
 package game.window;
 
 import game.entity.Player;
+import game.tile.CollisionChecker;
 import game.tile.TileManager;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,21 +22,22 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     final int scale = 3;
     
     public final int tileSize = originalTileSize * scale; // 48x48 tile
-    final int maxScreenCol = 16; //results in a 4:3 ratio
-    final int maxScreenRow = 12; //results in a 4:3 ratio
-    final int screenWidth = tileSize * maxScreenCol; // 768 pixels
-    final int screenHeight = tileSize * maxScreenRow; // 576 pixels
+    public final int maxScreenCol = 16; //results in a 4:3 ratio
+    public final int maxScreenRow = 12; //results in a 4:3 ratio
+    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
+    public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
     
     // FPS = Frames Per Second
     int FPS = 60;
     
     // Instanciations
-    TileManager tileM;
+    public TileManager tileM;
     GameMenuPanel gmp;
     GameBattlePanel gbp;
     KeyHandler keyH;
-    Thread gameThread; 
-    Player player;
+    Thread gameThread;
+    public CollisionChecker cChecker;
+    public Player player;
     
     public GameWorldPanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
@@ -44,6 +46,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         // Initialize the KeyHandler
         tileM  = new TileManager(this);
         keyH = new KeyHandler(this);
+        cChecker = new CollisionChecker(this);
         player = new Player(this, keyH);
         // Add the KeyHandler as a key listener
         addKeyListener(keyH);

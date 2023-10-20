@@ -45,41 +45,29 @@ public class GameBattlePanel extends JPanel{
         
         // Create the Attack button
         JButton attackButton = new JButton("Attack");
-        attackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle Attack button click
-            }
+        attackButton.addActionListener((ActionEvent e) -> {
+            // Handle Attack button click
         });
         buttonPanel.add(attackButton);
 
         // Create the Open Inventory button
         JButton inventoryButton = new JButton("Open Inventory");
-        inventoryButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle Inventory button click
-            }
+        inventoryButton.addActionListener((ActionEvent e) -> {
+            // Handle Inventory button click
         });
         buttonPanel.add(inventoryButton);
 
         // Create the Finish Turn button
         JButton finishTurnButton = new JButton("Finish Turn");
-        finishTurnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle Finish Turn button click
-            }
+        finishTurnButton.addActionListener((ActionEvent e) -> {
+            // Handle Finish Turn button click
         });
         buttonPanel.add(finishTurnButton);
 
         // Create the Retreat button
         JButton retreatButton = new JButton("Retreat");
-        retreatButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle Retreat button click
-            }
+        retreatButton.addActionListener((ActionEvent e) -> {
+            // Handle Retreat button click
         });
         buttonPanel.add(retreatButton);
 
@@ -89,6 +77,7 @@ public class GameBattlePanel extends JPanel{
     
     }
     
+    @Override
     public void paintComponent(Graphics g) {
         
         super.paintComponent(g);

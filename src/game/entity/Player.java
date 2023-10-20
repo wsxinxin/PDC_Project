@@ -8,6 +8,7 @@ import game.window.GameWorldPanel;
 import game.window.KeyHandler;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -24,6 +25,8 @@ public final class Player extends Entity{
     public Player(GameWorldPanel gwp, KeyHandler keyH) {
         this.gwp = gwp;
         this.keyH = keyH;
+        
+        solidArea = new Rectangle(8,16,32,32);
         
         setDefaultValues();
         getPlayerImage();
@@ -66,19 +69,38 @@ public final class Player extends Entity{
         
             if (keyH.upPressed == true) {
                 direction = "up";
-                y -= speed;
             }
             else if (keyH.downPressed == true) {
                 direction = "down";
-                y += speed;
             }
             else if (keyH.leftPressed == true) {
                 direction = "left";
-                x -= speed;
             }
             else if (keyH.rightPressed == true) {
                 direction = "right";
-                x += speed;
+            }
+            
+            // Check Tile Collision
+            collisionOn = false;
+            gwp.cChecker.checkTile(this);
+            
+            // If collision is false, player can move
+            if (collisionOn == false) {
+               
+                switch(direction){
+                    case "up":
+                        y -= speed;
+                        break;
+                    case "down":
+                        y += speed;
+                        break;
+                    case "left":
+                        x -= speed;
+                        break;
+                    case "right":
+                        x += speed;
+                        break;
+                }
             }
             
             spriteCounter++;
