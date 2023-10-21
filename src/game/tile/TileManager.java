@@ -4,6 +4,7 @@
  */
 package game.tile;
 
+import game.entity.Player;
 import game.window.GameWorldPanel;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -18,8 +19,10 @@ import javax.imageio.ImageIO;
  */
 public class TileManager {
     GameWorldPanel gwp;
+    Player player;
     Tile[]tile;
-    int mapTileNum[][];
+    int mapTileNum[][]; 
+    int Arena1;
 
     public TileManager(GameWorldPanel gwp) {
         this.gwp = gwp;
@@ -75,6 +78,22 @@ public class TileManager {
         } catch(IOException e){
             e.printStackTrace();
         }
+    }
+    
+    public int tileLocation() {
+        Arena1 = mapTileNum[13][2];
+        
+        return Arena1;  
+    }
+    
+    //FIX LATER
+    public void battleChecker() {
+        // Check if the player object is null before accessing its properties or methods.
+        
+        // Convert the pixel coordinates of the player to rows and columns.
+        //int playerCol = player.x / gwp.tileSize;
+        //int playerRow = player.y / gwp.tileSize;
+        
     }
     
     public void loadMap() {

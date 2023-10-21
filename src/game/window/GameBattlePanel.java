@@ -5,12 +5,9 @@
 package game.window;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
@@ -39,13 +36,16 @@ public class GameBattlePanel extends JPanel {
     public BufferedImage image;
 
     // Constructor for GameBattlePanel
-    public GameBattlePanel() throws IOException {
+    public GameBattlePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setDoubleBuffered(true);
-
+        
+        try {
         // Load the background image (replace "image_path" with the actual path to your image file)
         image = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Arena1.png"));
-
+        } catch (IOException e) {
+            
+        }
         // Create a JPanel to hold the buttons in a 2x2 grid layout at the bottom
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
 
