@@ -7,42 +7,48 @@ package game.window;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
- *
- * @author chris
+ * GameBattlePanel
+ * A panel for the game battle screen with a background image.
  */
-public class GameBattlePanel extends JPanel{
-    
-    //SCREEN SETTINGS
+public class GameBattlePanel extends JPanel {
+
+    // SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
-    
+
     final int tileSize = originalTileSize * scale; // 48x48 tile
-    final int maxScreenCol = 16; //results in a 4:3 ratio
-    final int maxScreenRow = 12; //results in a 4:3 ratio
+    final int maxScreenCol = 16; // results in a 4:3 ratio
+    final int maxScreenRow = 12; // results in a 4:3 ratio
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     final int screenHeight = tileSize * maxScreenRow; // 576 pixels
-    
+
+    // Background Image
+    public BufferedImage image;
+
     // Constructor for GameBattlePanel
-    public GameBattlePanel() {
-        
+    public GameBattlePanel() throws IOException {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+
+        // Load the background image (replace "image_path" with the actual path to your image file)
+        image = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Arena1.png"));
 
         // Create a JPanel to hold the buttons in a 2x2 grid layout at the bottom
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2));
-        
+
         // Create the Attack button
         JButton attackButton = new JButton("Attack");
         attackButton.addActionListener((ActionEvent e) -> {
@@ -74,13 +80,18 @@ public class GameBattlePanel extends JPanel{
         // Add the button panel to the bottom of the GameBattlePanel
         this.setLayout(new BorderLayout());
         this.add(buttonPanel, BorderLayout.SOUTH);
-    
+
+        // Set the background image
+        this.setOpaque(false); // Make the panel transparent
     }
-    
+
     @Override
-    public void paintComponent(Graphics g) {
-        
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-               
-    }
+
+        Graphics2D g2 = (Graphics2D) g;
+
+        // Draw the background image to cover the entire panel
+        g2.drawImage(image, WIDTH, WIDTH, screenWidth, screenHeight, null);
+    };
 }
