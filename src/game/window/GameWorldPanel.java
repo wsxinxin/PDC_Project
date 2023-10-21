@@ -99,6 +99,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         player.update();
     }
     
+    @Override
     public void paintComponent(Graphics g) {
         
         super.paintComponent(g);

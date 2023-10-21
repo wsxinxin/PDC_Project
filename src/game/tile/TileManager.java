@@ -38,10 +38,10 @@ public class TileManager {
             
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0001.png"));
-            tile[1].collision = true;
             
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0002.png"));
+            tile[2].collision = true;
             
             tile[3] = new Tile();
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/polluted_water.png"));
@@ -58,6 +58,7 @@ public class TileManager {
             
             tile[7] = new Tile();
             tile[7].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/ruines-0001.png"));
+            tile[7].collision = true;
             
             tile[8] = new Tile();
             tile[8].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water.png"));
@@ -129,6 +130,22 @@ public class TileManager {
                 row++;
                 y += gwp.tileSize;
             }
-        }  
+        } 
+        
+        // Cities in ruines 
+        g2.drawImage(tile[7].image, 576, 0, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 624, 0, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 480, 48, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 624, 48, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 672, 48, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 480, 96, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 528, 96, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 576, 144, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 624, 144, gwp.tileSize,gwp.tileSize, null);
+        
+        g2.drawImage(tile[7].image, 336,432, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 384,432, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[7].image, 336,480, gwp.tileSize, gwp.tileSize, null);
+        
     }
 }
