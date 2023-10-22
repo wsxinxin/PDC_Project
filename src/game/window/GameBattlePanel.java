@@ -4,6 +4,8 @@
  */
 package game.window;
 
+import game.entity.Monster;
+import game.entity.Player;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -34,7 +36,7 @@ public class GameBattlePanel extends JPanel {
 
     // Background Image
     public BufferedImage image;
-
+    public BufferedImage playerImg;
     // Constructor for GameBattlePanel
     public GameBattlePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -43,6 +45,7 @@ public class GameBattlePanel extends JPanel {
         try {
         // Load the background image (replace "image_path" with the actual path to your image file)
         image = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Arena1.png"));
+        playerImg = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0004.png"));
         } catch (IOException e) {
             
         }
@@ -93,5 +96,7 @@ public class GameBattlePanel extends JPanel {
 
         // Draw the background image to cover the entire panel
         g2.drawImage(image, WIDTH, WIDTH, screenWidth, screenHeight, null);
+        
+        g2.drawImage(playerImg, 96,336, tileSize * 3, tileSize * 3, null);
     };
 }

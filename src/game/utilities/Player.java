@@ -1,7 +1,7 @@
-package game.entities;
+package game.utilities;
 
 import game.content.GameContent;
-import game.main.GameMenu;
+//import game.main.GameMenu;
 import java.util.ArrayList;
 import java.util.List;
 /**

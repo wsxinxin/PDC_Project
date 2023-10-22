@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  */
 public class TileManager {
     GameWorldPanel gwp;
-    Player player;
+    BattleDetection bDetect;
     Tile[]tile;
     int mapTileNum[][]; 
     int Arena1;
@@ -64,7 +64,7 @@ public class TileManager {
             tile[7].collision = true;
             
             tile[8] = new Tile();
-            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water.png"));
+            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0001.png"));
             tile[8].collision = true;
             
             tile[9] = new Tile();
@@ -74,6 +74,29 @@ public class TileManager {
             tile[10] = new Tile();
             tile[10].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-transition-0002.png"));
             tile[10].collision = true;
+            
+            tile[11] = new Tile();
+            tile[11].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0002.png"));
+            tile[11].collision = true; 
+            
+            tile[12] = new Tile();
+            tile[12].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0003.png"));
+            tile[12].collision = true; 
+            
+            tile[13] = new Tile();
+            tile[13].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0004.png"));
+            tile[13].collision = true; 
+            
+            tile[14] = new Tile();
+            tile[14].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0005.png"));
+            tile[14].collision = true; 
+            
+            tile[15] = new Tile();
+            tile[15].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0006.png"));
+            tile[15].collision = true; 
+            
+            tile[16] = new Tile();
+            tile[16].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0003.png"));
             
         } catch(IOException e){
             e.printStackTrace();
@@ -86,15 +109,6 @@ public class TileManager {
         return Arena1;  
     }
     
-    //FIX LATER
-    public void battleChecker() {
-        // Check if the player object is null before accessing its properties or methods.
-        
-        // Convert the pixel coordinates of the player to rows and columns.
-        //int playerCol = player.x / gwp.tileSize;
-        //int playerRow = player.y / gwp.tileSize;
-        
-    }
     
     public void loadMap() {
         

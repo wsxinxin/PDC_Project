@@ -21,6 +21,7 @@ public final class Player extends Entity{
     
     GameWorldPanel gwp;
     KeyHandler keyH;
+    int playerHp = 100;
 
     public Player(GameWorldPanel gwp, KeyHandler keyH) {
         this.gwp = gwp;
@@ -36,6 +37,14 @@ public final class Player extends Entity{
         y = 100;
         speed = 4;
         direction = "down";
+    }
+    
+    // decrease the hp after suffer damage
+    public void decreaseHP(int damage) {
+        playerHp -= damage;
+        if (playerHp < 0) {
+            playerHp = 0;
+        }
     }
     
     public void getPlayerImage(){

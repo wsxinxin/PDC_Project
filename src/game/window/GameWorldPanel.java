@@ -97,6 +97,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     public void update() {
         
         player.update();
+        
     }
     
     @Override
@@ -139,7 +140,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);   
     }
-    
+      
     @Override
     public void keyTyped(KeyEvent ke) {
     }
@@ -153,8 +154,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         }
         
         else if (code == KeyEvent.VK_ENTER){
-            
-            tileM.battleChecker();
+           
             executeGameBattle();
             // Call the method to execute the Battle 
         }

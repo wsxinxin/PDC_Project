@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package game.database;
-import game.entities.Player;
+import game.utilities.Player;
 
 /**
  *
