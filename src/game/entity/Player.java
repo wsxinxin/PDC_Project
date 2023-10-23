@@ -4,9 +4,9 @@
  */
 package game.entity;
 
+import game.tile.UtilityTool;
 import game.window.GameWorldPanel;
 import game.window.KeyHandler;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -19,12 +19,10 @@ import javax.imageio.ImageIO;
  */
 public final class Player extends Entity{
     
-    GameWorldPanel gwp;
     KeyHandler keyH;
-    int playerHp = 100;
 
     public Player(GameWorldPanel gwp, KeyHandler keyH) {
-        this.gwp = gwp;
+        super(gwp);
         this.keyH = keyH;
         
         solidArea = new Rectangle(8,16,32,32);
@@ -39,39 +37,34 @@ public final class Player extends Entity{
         direction = "down";
     }
     
-    // decrease the hp after suffer damage
+    /*/ decrease the hp after suffer damage
     public void decreaseHP(int damage) {
         playerHp -= damage;
         if (playerHp < 0) {
             playerHp = 0;
         }
-    }
+    }*/
     
     public void getPlayerImage(){
-        
-        try{
-            
-            up1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0001.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0009.png"));
-            up3 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0010.png"));
-            
-            down1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0004.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0005.png"));
-            down3 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0006.png"));
-            
-            left1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0003.png")); 
-            left2 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0011.png"));
-            left3 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0012.png"));  
-            
-            right1 = ImageIO.read(getClass().getResourceAsStream("/playersprites/Sprite-0002.png"));      
-            right2 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0007.png"));  
-            right3 = ImageIO.read(getClass().getResourceAsStream("/playerSprites/Sprite-0008.png"));
-            
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
     
+        up1 = setup("playersprites/Sprite-0001"); 
+        up2 = setup("playersprites/Sprite-0009");
+        up3 = setup("playersprites/Sprite-0010");
+                
+        down1 = setup("playersprites/Sprite-0004");
+        down2 = setup("playersprites/Sprite-0005");        
+        down3 = setup("playersprites/Sprite-0006"); 
+                
+        left1 = setup("playersprites/Sprite-0003");        
+        left2 = setup("playersprites/Sprite-0011");        
+        left3 = setup("playersprites/Sprite-0012");
+                    
+        right1 = setup("playersprites/Sprite-0002");        
+        right2 = setup("playersprites/Sprite-0007");        
+        right3 =  setup("playersprites/Sprite-0008");           
+    }
+     
+    @Override
     public void update(){
         
         if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true) {
@@ -185,6 +178,6 @@ public final class Player extends Entity{
             }
             break;
         }
-        g2.drawImage(image, x, y, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(image, x, y, null);
     }
 }

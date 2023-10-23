@@ -19,14 +19,13 @@ import javax.imageio.ImageIO;
  */
 public class TileManager {
     GameWorldPanel gwp;
-    BattleDetection bDetect;
     Tile[]tile;
     int mapTileNum[][]; 
     int Arena1;
 
     public TileManager(GameWorldPanel gwp) {
         this.gwp = gwp;
-        tile = new Tile[20];
+        tile = new Tile[30];
         mapTileNum = new int[gwp.maxScreenCol][gwp.maxScreenRow];
         
         getTileImage();
@@ -35,85 +34,48 @@ public class TileManager {
     
     public void getTileImage(){
         
-        try {
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/grass.png"));
+        setup(0, "grass", false);
+        setup(1, "infected_grass-0001", false);
+        setup(2, "infected_grass-0002", true);
+        setup(3, "infected_grass-0003", false);
+        setup(4, "water-polluted", true);
+        setup(5, "ruines-0001", true);
+        setup(6, "water-transition-0001", true);
+        setup(7, "water-transition-0002", true);
+        setup(8, "water-0001", true);
+        setup(9, "water-0002", true);
+        setup(10, "water-0003", true);
+        setup(11, "water-0004", true);
+        setup(12, "water-0005", true);
+        setup(13, "water-0006", true);
+        setup(14, "wall-0001", true);
+        setup(15, "wall-0002", true);
+        setup(16, "wall-0003", true);
+        setup(17, "wall-0004", true);
+        setup(18, "wall-0005", true);
+        setup(19, "wall-0006", true);
+        setup(20, "wall-0007", true);
+        setup(21, "wall-0008", true);      
+    }
+    
+    public void setup(int index, String imageName, boolean collision) {
+        UtilityTool uTool = new UtilityTool();
+        
+        try{
+            tile[index] = new Tile();
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/res/worldtiles/"+ imageName +".png"));
+            tile[index].image = uTool.scaleImage(tile[index].image, gwp.tileSize, gwp.tileSize);
+            tile[index].collision = collision;
             
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0001.png"));
-            
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0002.png"));
-            tile[2].collision = true;
-            
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/polluted_water.png"));
-            tile[3].collision = true;
-            
-            tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/road-0001.png"));
-            
-            tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/road-0002.png"));
-            
-            tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/road-0003.png"));
-            
-            tile[7] = new Tile();
-            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/ruines-0001.png"));
-            tile[7].collision = true;
-            
-            tile[8] = new Tile();
-            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0001.png"));
-            tile[8].collision = true;
-            
-            tile[9] = new Tile();
-            tile[9].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-transition-0001.png"));
-            tile[9].collision = true;
-            
-            tile[10] = new Tile();
-            tile[10].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-transition-0002.png"));
-            tile[10].collision = true;
-            
-            tile[11] = new Tile();
-            tile[11].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0002.png"));
-            tile[11].collision = true; 
-            
-            tile[12] = new Tile();
-            tile[12].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0003.png"));
-            tile[12].collision = true; 
-            
-            tile[13] = new Tile();
-            tile[13].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0004.png"));
-            tile[13].collision = true; 
-            
-            tile[14] = new Tile();
-            tile[14].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0005.png"));
-            tile[14].collision = true; 
-            
-            tile[15] = new Tile();
-            tile[15].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/water-0006.png"));
-            tile[15].collision = true; 
-            
-            tile[16] = new Tile();
-            tile[16].image = ImageIO.read(getClass().getResourceAsStream("/worldtiles/infected_grass-0003.png"));
-            
-        } catch(IOException e){
+        } catch(IOException e) {
             e.printStackTrace();
         }
-    }
-    
-    public int tileLocation() {
-        Arena1 = mapTileNum[13][2];
-        
-        return Arena1;  
-    }
-    
+    }  
     
     public void loadMap() {
         
         try {
-            InputStream is = getClass().getResourceAsStream("/resmap/map.txt");
+            InputStream is = getClass().getResourceAsStream("/res/map/map.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             
             int col = 0;
@@ -153,7 +115,7 @@ public class TileManager {
             
             int tileNum = mapTileNum[col][row];
             
-            g2.drawImage(tile[tileNum].image, x, y, gwp.tileSize,gwp.tileSize, null);
+            g2.drawImage(tile[tileNum].image, x, y, null);
             col++;
             x += gwp.tileSize;
             
@@ -166,19 +128,33 @@ public class TileManager {
         } 
         
         // Cities in ruines 
-        g2.drawImage(tile[7].image, 576, 0, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 624, 0, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 480, 48, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 624, 48, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 672, 48, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 480, 96, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 528, 96, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 576, 144, gwp.tileSize,gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 624, 144, gwp.tileSize,gwp.tileSize, null);
+        g2.drawImage(tile[5].image, 576, 0, null);
+        g2.drawImage(tile[5].image, 624, 0, null);
+        g2.drawImage(tile[5].image, 480, 48, null);
+        g2.drawImage(tile[5].image, 624, 48, null);
+        g2.drawImage(tile[5].image, 672, 48, null);
+        g2.drawImage(tile[5].image, 480, 96, null);
+        g2.drawImage(tile[5].image, 528, 96, null);
+        g2.drawImage(tile[5].image, 576, 144, null);
+        g2.drawImage(tile[5].image, 624, 144, null);
         
-        g2.drawImage(tile[7].image, 336,432, gwp.tileSize, gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 384,432, gwp.tileSize, gwp.tileSize, null);
-        g2.drawImage(tile[7].image, 336,480, gwp.tileSize, gwp.tileSize, null);
+        g2.drawImage(tile[5].image, 336,432, null);
+        g2.drawImage(tile[5].image, 384,432, null);
+        g2.drawImage(tile[5].image, 336,480, null);
         
+        /*// Lockdown Walls
+        g2.drawImage(tile[18].image, 0,0, null);
+        g2.drawImage(tile[14].image, 96,0, null);
+        g2.drawImage(tile[14].image, 144,0, null);
+        g2.drawImage(tile[14].image, 192,0, null);
+        g2.drawImage(tile[14].image, 240,0, null);        
+        g2.drawImage(tile[14].image, 288,0, null);
+        g2.drawImage(tile[14].image, 336,0, null);
+        g2.drawImage(tile[14].image, 384,0, null);      
+        g2.drawImage(tile[14].image, 432,0, null);      
+        g2.drawImage(tile[14].image, 480,0, null);      
+        g2.drawImage(tile[14].image, 528,0, null);      
+        g2.drawImage(tile[14].image, 672,0, null);      
+        g2.drawImage(tile[19].image, 720,0, null);*/
     }
 }

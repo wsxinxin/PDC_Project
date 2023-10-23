@@ -4,11 +4,16 @@
  */
 package game.window;
 
+import game.entity.Entity;
 import game.entity.Player;
+import game.tile.AssetSetter;
 import game.tile.CollisionChecker;
 import game.tile.TileManager;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.*;
 
 /**
@@ -33,11 +38,14 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     // Instanciations
     public TileManager tileM;
     GameMenuPanel gmp;
-    GameBattlePanel gbp;
     KeyHandler keyH;
+    AssetSetter aSetter = new AssetSetter(this);;
     Thread gameThread;
     public CollisionChecker cChecker;
+    // Entities and Objects
     public Player player;
+    public Entity monster[] = new Entity[5];
+    ArrayList<Entity> entityList = new ArrayList<>();
     
     public GameWorldPanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
@@ -46,7 +54,9 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         // Initialize the KeyHandler
         tileM  = new TileManager(this);
         keyH = new KeyHandler(this);
+        // Check collision
         cChecker = new CollisionChecker(this);
+        // Entity and Object
         player = new Player(this, keyH);
         // Add the KeyHandler as a key listener
         addKeyListener(keyH);
@@ -54,6 +64,9 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         
         addKeyListener(this);
         setFocusable(true);
+    }
+    public void setupGame(){
+        aSetter.setMonster();
     }
 
     public void startGameThread(){
@@ -95,8 +108,14 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     }
     
     public void update() {
-        
+        //PLAYER
         player.update();
+        //MONSTER
+        for (int i = 0; i < monster.length; i++) {
+            if (monster[i] != null) {
+                monster[i].update();
+            }
+        }
         
     }
     
@@ -107,9 +126,37 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         
         Graphics2D g2 = (Graphics2D)g; // convert Graphics java claas to Graphics2D class which has more functions
         
+        // TILE
         tileM.draw(g2);
         
-        player.draw(g2);
+        // ADD ENTITIES TO THE LIST
+        entityList.add(player);
+        
+        for(int i = 0; i < monster.length; i++) {
+            if (monster[i] != null) {
+                entityList.add(monster[i]);
+            }
+        }
+        
+        // SORT
+        Collections.sort(entityList, new Comparator<Entity>() {
+            @Override
+            public int compare(Entity e1, Entity e2) {
+                
+                int result = Integer.compare(e1.y, e2.y);
+                return result;
+            }
+            
+        });
+        
+        // DRAW ENTITIES
+        for (int i = 0; i < entityList.size(); i++) {
+            entityList.get(i).draw(g2);
+        }
+        // EMPTY EMTITY LIST
+        for (int i = 0; i < entityList.size(); i++) {
+            entityList.remove(i);
+        }
         
         g2.dispose();
     }
@@ -126,7 +173,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         frame.setVisible(true);   
     }
     
-    public void executeGameBattle() {
+    /*public void executeGameBattle() {
         // Create a JFrame to display the game battle 
         JFrame frame = new JFrame("Game Battle");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -139,7 +186,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);   
-    }
+    }*/
       
     @Override
     public void keyTyped(KeyEvent ke) {
@@ -153,11 +200,11 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
             executeGameMenu(); // Call the method to execute the menu
         }
         
-        else if (code == KeyEvent.VK_ENTER){
+        /*else if (code == KeyEvent.VK_ENTER){
            
-            executeGameBattle();
+            //executeGameBattle();
             // Call the method to execute the Battle 
-        }
+        }*/
     }
 
     @Override
