@@ -12,11 +12,14 @@ import java.awt.event.*;
  */
 public class KeyHandler implements KeyListener{
 
-    public KeyHandler(GameWorldPanel aThis) {
-    }
+    GameWorldPanel gwp;
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
 
+    public KeyHandler(GameWorldPanel gwp) {
+        this.gwp = gwp;
+    }
+    
     @Override
     public void keyTyped(KeyEvent ke) {
     }
@@ -36,6 +39,17 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_D){
             rightPressed = true;
+        }
+        if(code == KeyEvent.VK_P){
+            if (gwp.gameState == gwp.playState){
+                gwp.gameState = gwp.pauseState;
+            }
+            else if (gwp.gameState == gwp.pauseState){
+                gwp.gameState = gwp.playState;
+            }
+        }
+        if (code == KeyEvent.VK_ESCAPE) {
+            gwp.executeGameMenu(); // Call the method to execute the menu
         }
     }
 

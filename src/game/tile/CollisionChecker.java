@@ -21,22 +21,22 @@ public class CollisionChecker {
     
     public void checkTile(Entity entity){
         
-        int entityLeftX = entity.x + entity.solidArea.x;
-        int entityRightX = entity.x + entity.solidArea.x + entity.solidArea.width;
-        int entityTopY = entity.y + entity.solidArea.y;
-        int entityBottomY = entity.y + entity.solidArea.y + entity.solidArea.height;
+        int entityLeftWorldX = entity.worldX + entity.solidArea.x;
+        int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
+        int entityTopWorldY = entity.worldY + entity.solidArea.y;
+        int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height;
         
-        int entityLeftCol = entityLeftX/gwp.tileSize;
-        int entityRightCol = entityRightX/gwp.tileSize;
-        int entityTopRow = entityTopY/gwp.tileSize;
-        int entityBottomRow = entityBottomY/gwp.tileSize;
+        int entityLeftCol = entityLeftWorldX/gwp.tileSize;
+        int entityRightCol = entityRightWorldX/gwp.tileSize;
+        int entityTopRow = entityTopWorldY/gwp.tileSize;
+        int entityBottomRow = entityBottomWorldY/gwp.tileSize;
         
         int tileNum1, tileNum2;
         
         switch(entity.direction){
             
         case "up":
-            entityTopRow = (entityTopY - entity.speed)/gwp.tileSize;
+            entityTopRow = (entityTopWorldY - entity.speed)/gwp.tileSize;
             tileNum1 = gwp.tileM.mapTileNum[entityLeftCol][entityTopRow];
             tileNum2 = gwp.tileM.mapTileNum[entityRightCol][entityTopRow];
             if (gwp.tileM.tile[tileNum1].collision == true || gwp.tileM.tile[tileNum2].collision) {
@@ -44,7 +44,7 @@ public class CollisionChecker {
             }
             break;
         case "down":
-            entityBottomRow = (entityBottomY + entity.speed)/gwp.tileSize;
+            entityBottomRow = (entityBottomWorldY + entity.speed)/gwp.tileSize;
             tileNum1 = gwp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
             tileNum2 = gwp.tileM.mapTileNum[entityRightCol][entityBottomRow];
             if (gwp.tileM.tile[tileNum1].collision == true || gwp.tileM.tile[tileNum2].collision) {
@@ -52,7 +52,7 @@ public class CollisionChecker {
             }
             break;
         case "left":
-            entityLeftCol = (entityLeftX - entity.speed)/gwp.tileSize;
+            entityLeftCol = (entityLeftWorldX - entity.speed)/gwp.tileSize;
             tileNum1 = gwp.tileM.mapTileNum[entityLeftCol][entityTopRow];
             tileNum2 = gwp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
             if (gwp.tileM.tile[tileNum1].collision == true || gwp.tileM.tile[tileNum2].collision) {
@@ -60,7 +60,7 @@ public class CollisionChecker {
             }
             break;
         case "right":
-            entityRightCol = (entityRightX + entity.speed)/gwp.tileSize;
+            entityRightCol = (entityRightWorldX + entity.speed)/gwp.tileSize;
             tileNum1 = gwp.tileM.mapTileNum[entityRightCol][entityTopRow];
             tileNum2 = gwp.tileM.mapTileNum[entityRightCol][entityBottomRow];
             if (gwp.tileM.tile[tileNum1].collision == true || gwp.tileM.tile[tileNum2].collision) {
@@ -81,11 +81,11 @@ public class CollisionChecker {
             if (target[i] != null) {
                 
                 // Get enetity's solid area position
-                entity.solidArea.x = entity.x + entity.solidArea.x;
-                entity.solidArea.y = entity.y + entity.solidArea.y;
+                entity.solidArea.x = entity.worldX + entity.solidArea.x;
+                entity.solidArea.y = entity.worldY + entity.solidArea.y;
                 
-                target[i].solidArea.x = target[i].x + target[i].solidArea.x;
-                target[i].solidArea.y = target[i].y + target[i].solidArea.y;
+                target[i].solidArea.x = target[i].worldX + target[i].solidArea.x;
+                target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
                 
                 switch (entity.direction) {
                     
@@ -129,11 +129,11 @@ public class CollisionChecker {
     
     public void checkPlayer(Entity entity){
         
-        entity.solidArea.x = entity.x + entity.solidArea.x;
-        entity.solidArea.y = entity.y + entity.solidArea.y;
+        entity.solidArea.x = entity.worldX + entity.solidArea.x;
+        entity.solidArea.y = entity.worldY + entity.solidArea.y;
                 
-        gwp.player.solidArea.x = gwp.player.x + gwp.player.solidArea.x;
-        gwp.player.solidArea.y = gwp.player.y + gwp.player.solidArea.y;
+        gwp.player.solidArea.x = gwp.player.worldX + gwp.player.solidArea.x;
+        gwp.player.solidArea.y = gwp.player.worldY + gwp.player.solidArea.y;
                 
         switch (entity.direction) {
                     

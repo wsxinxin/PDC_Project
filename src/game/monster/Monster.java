@@ -32,17 +32,20 @@ public class Monster extends Entity{
         getImage();
     }
     
-    public void getImage(){
+    public void getImage() {
         
-        up1 = setup("monstersprites/Goons.png");
-        up2 = setup("monstersprites/Goons.png");
-        down1 = setup("monstersprites/Goons.png");
-        down2 = setup("monstersprites/Goons.png");
-        left1 = setup("monstersprites/Goons.png");
-        left2 = setup("monstersprites/Goons.png");
-        right1 = setup("monstersprites/Goons.png");
-        right2 = setup("monstersprites/Goons.png");
- 
+        up1 = setup("monstersprites/Goons");
+        up2 = setup("monstersprites/Goons");
+        up3 = setup("monstersprites/Goons");
+        down1 = setup("monstersprites/Goons");
+        down2 = setup("monstersprites/Goons");
+        down3 = setup("monstersprites/Goons");
+        left1 = setup("monstersprites/Goons");
+        left2 = setup("monstersprites/Goons");
+        left3 = setup("monstersprites/Goons");
+        right1 = setup("monstersprites/Goons");
+        right2 = setup("monstersprites/Goons");
+        right3 = setup("monstersprites/Goons");
     }
     
     @Override

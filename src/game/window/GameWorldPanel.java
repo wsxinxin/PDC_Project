@@ -9,6 +9,7 @@ import game.entity.Player;
 import game.tile.AssetSetter;
 import game.tile.CollisionChecker;
 import game.tile.TileManager;
+import game.tile.UI;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -32,41 +33,44 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
     
+    // WORLD SETTINGS 
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
+    
     // FPS = Frames Per Second
     int FPS = 60;
     
-    // Instanciations
-    public TileManager tileM;
+    // SYSTEM
     GameMenuPanel gmp;
-    KeyHandler keyH;
-    AssetSetter aSetter = new AssetSetter(this);;
+    public TileManager tileM  = new TileManager(this);
+    public KeyHandler keyH = new KeyHandler(this);
+    public CollisionChecker cChecker = new CollisionChecker(this);;
+    public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread;
-    public CollisionChecker cChecker;
+    
     // Entities and Objects
-    public Player player;
+    public Player player = new Player(this, keyH);;
     public Entity monster[] = new Entity[5];
     ArrayList<Entity> entityList = new ArrayList<>();
+    
+    // GAME STATE
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
     
     public GameWorldPanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
         this.setBackground(Color.black); //set the colors of the screeen
         this.setDoubleBuffered(true); // Buffer
-        // Initialize the KeyHandler
-        tileM  = new TileManager(this);
-        keyH = new KeyHandler(this);
-        // Check collision
-        cChecker = new CollisionChecker(this);
-        // Entity and Object
-        player = new Player(this, keyH);
-        // Add the KeyHandler as a key listener
-        addKeyListener(keyH);
+        this.addKeyListener(keyH);
         this.setFocusable(true);
-        
-        addKeyListener(this);
-        setFocusable(true);
     }
     public void setupGame(){
         aSetter.setMonster();
+        gameState = playState;
     }
 
     public void startGameThread(){
@@ -78,45 +82,50 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     public void run() {
         
         double drawInterval = 1000000000/FPS; //0.016667 seconds
-        double nextDrawTime = System.nanoTime() + drawInterval;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+        long timer = 0;
+        int drawCount = 0;
         
-        while(gameThread != null) {
-                       
-            // 1st UPDATE: update information such as character positions
-            update(); // invokes update method
+        while (gameThread != null) {
             
-            // 2nd DRAW: draw the screen with update information
-            repaint(); // invokes paintComponent method
+            currentTime = System.nanoTime();
             
+            delta += (currentTime - lastTime) / drawInterval;
+            timer += (currentTime - lastTime);
+            lastTime = currentTime;
             
-            try{
-                double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime/1000000;
-                
-                if (remainingTime < 0) {
-                    remainingTime = 0;
-                }
-                
-                Thread.sleep((long)remainingTime);
-                
-                nextDrawTime += drawInterval;
-                
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if(delta >= 1) {
+                update();
+                repaint();
+                delta--;
+                drawCount++;
+            }
+            
+            if(timer >= 1000000000) {
+                //System.out.println("FPS:" + drawCount);
+                drawCount = 0;
+                timer = 0;
             }
         }
     }
     
     public void update() {
-        //PLAYER
-        player.update();
-        //MONSTER
-        for (int i = 0; i < monster.length; i++) {
-            if (monster[i] != null) {
-                monster[i].update();
-            }
-        }
         
+        if (gameState == playState) {
+            //PLAYER
+            player.update();
+            //MONSTER
+            for (int i = 0; i < monster.length; i++) {
+                if (monster[i] != null) {
+                    monster[i].update();
+                }
+            }
+        } 
+        if (gameState == pauseState) {
+            //nothing
+        }
     }
     
     @Override
@@ -143,7 +152,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
             @Override
             public int compare(Entity e1, Entity e2) {
                 
-                int result = Integer.compare(e1.y, e2.y);
+                int result = Integer.compare(e1.worldY, e2.worldY);
                 return result;
             }
             
@@ -157,6 +166,9 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         for (int i = 0; i < entityList.size(); i++) {
             entityList.remove(i);
         }
+        
+        // UI
+        ui.draw(g2);
         
         g2.dispose();
     }
@@ -194,17 +206,6 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        
-        int code = ke.getKeyCode();
-        if (code == KeyEvent.VK_ESCAPE) {
-            executeGameMenu(); // Call the method to execute the menu
-        }
-        
-        /*else if (code == KeyEvent.VK_ENTER){
-           
-            //executeGameBattle();
-            // Call the method to execute the Battle 
-        }*/
     }
 
     @Override

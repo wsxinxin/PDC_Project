@@ -6,8 +6,6 @@ package game.object;
 
 import game.entity.Entity;
 import game.window.GameWorldPanel;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -19,7 +17,7 @@ public class OBJ_Key extends Entity{
         super(gwp);   
         
         name = "Key";
-        down1 = setup("/res/objects/key");
+        down1 = setup("objects/key");
         
     }
 }

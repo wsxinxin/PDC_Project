@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 public class Entity {
     
     GameWorldPanel gwp;
-    public int x, y;
+    public int worldX, worldY;
     public int speed;  
     public BufferedImage up1, up2, up3, down1, down2, down3, left1, left2, left3, right1, right2, right3;
     public String direction = "down";
@@ -41,11 +41,10 @@ public class Entity {
         this.gwp = gwp;
     }
     
-    public void setAction(){
-        
-    }
+    public void setAction(){}
     
     public void update(){
+        
         setAction();
         
         collisionOn = false;
@@ -56,18 +55,10 @@ public class Entity {
         if (collisionOn == false) {
                
             switch(direction){
-                case "up":
-                    y -= speed;
-                    break;
-                case "down":
-                    y += speed;
-                    break;
-                case "left":
-                    x -= speed;
-                    break;
-                case "right":
-                    x += speed;
-                    break;
+                case "up": worldY -= speed; break;
+                case "down": worldY += speed; break;
+                case "left": worldX -= speed; break;
+                case "right": worldX += speed; break;
             }
         }
         
@@ -93,13 +84,14 @@ public class Entity {
     public void draw(Graphics2D g2) {
         
        BufferedImage image = null;
-       int screenX = x - gwp.player.x;
-       int screenY = x - gwp.player.y;
        
-       if (x + gwp.tileSize > gwp.player.x &&
-           x - gwp.tileSize < gwp.player.x &&
-           y + gwp.tileSize > gwp.player.y &&
-           y - gwp.tileSize < gwp.player.y) {
+       int screenX = worldX - gwp.player.worldX + gwp.player.screenX;
+       int screenY = worldY - gwp.player.worldY + gwp.player.screenY;
+       
+       if (worldX + gwp.tileSize > gwp.player.worldX - gwp.player.screenX &&
+           worldX - gwp.tileSize < gwp.player.worldX + gwp.player.screenX &&
+           worldY + gwp.tileSize > gwp.player.worldY - gwp.player.screenY &&
+           worldY - gwp.tileSize < gwp.player.worldY + gwp.player.screenY) {
            
            switch (direction) {
             
@@ -157,7 +149,7 @@ public class Entity {
         BufferedImage image = null; 
         
         try {
-            image = ImageIO.read(getClass().getResourceAsStream("/res/" + imageName + ".png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/res/"+ imageName +".png"));
             image = uTool.scaleImage(image, gwp.tileSize, gwp.tileSize);
             
         }catch(IOException e){

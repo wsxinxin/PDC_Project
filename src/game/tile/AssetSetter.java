@@ -22,15 +22,15 @@ public class AssetSetter {
     public void setMonster(){
         
         gwp.monster[0] = new Monster(gwp);
-        gwp.monster[0].x = gwp.tileSize*13;
-        gwp.monster[0].y = gwp.tileSize*3;
+        gwp.monster[0].worldX = gwp.tileSize*24;
+        gwp.monster[0].worldY = gwp.tileSize*22;
         
         gwp.monster[1] = new Monster(gwp);
-        gwp.monster[1].x = gwp.tileSize*5;
-        gwp.monster[1].y = gwp.tileSize*2;
+        gwp.monster[1].worldX = gwp.tileSize*28;
+        gwp.monster[1].worldY = gwp.tileSize*27;
         
-        gwp.monster[0] = new Monster(gwp);
-        gwp.monster[0].x = gwp.tileSize*15;
-        gwp.monster[0].y = gwp.tileSize*7;
+        /*gwp.monster[2] = new Monster(gwp);
+        gwp.monster[2].worldX = gwp.tileSize*15;
+        gwp.monster[2].worldY = gwp.tileSize*7;*/
     }
 }

@@ -20,31 +20,35 @@ import javax.imageio.ImageIO;
 public final class Player extends Entity{
     
     KeyHandler keyH;
+    
+    public final int screenX;
+    public final int screenY;
 
     public Player(GameWorldPanel gwp, KeyHandler keyH) {
         super(gwp);
         this.keyH = keyH;
         
-        solidArea = new Rectangle(8,16,32,32);
+        screenX = gwp.screenWidth/2 - (gwp.tileSize/2);
+        screenY = gwp.screenHeight/2 -(gwp.tileSize/2);
+        
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x; 
+        solidAreaDefaultY = solidArea.y; 
+        solidArea.width = 32;
+        solidArea.height = 32;
         
         setDefaultValues();
         getPlayerImage();
     }
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = gwp.tileSize*18;
+        worldY = gwp.tileSize*20;
         speed = 4;
         direction = "down";
     }
-    
-    /*/ decrease the hp after suffer damage
-    public void decreaseHP(int damage) {
-        playerHp -= damage;
-        if (playerHp < 0) {
-            playerHp = 0;
-        }
-    }*/
-    
+     
     public void getPlayerImage(){
     
         up1 = setup("playersprites/Sprite-0001"); 
@@ -91,16 +95,16 @@ public final class Player extends Entity{
                
                 switch(direction){
                     case "up":
-                        y -= speed;
+                        worldY -= speed;
                         break;
                     case "down":
-                        y += speed;
+                        worldY += speed;
                         break;
                     case "left":
-                        x -= speed;
+                        worldX -= speed;
                         break;
                     case "right":
-                        x += speed;
+                        worldX += speed;
                         break;
                 }
             }
@@ -124,6 +128,7 @@ public final class Player extends Entity{
             }
         }
     }
+    @Override
     public void draw(Graphics2D g2){
         
         //g2.setColor(Color.white);  
@@ -178,6 +183,6 @@ public final class Player extends Entity{
             }
             break;
         }
-        g2.drawImage(image, x, y, null);
+        g2.drawImage(image, screenX, screenY, null);
     }
 }

@@ -85,7 +85,8 @@ public class GameStartPanel extends JPanel {
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
+        
+        gameWorldPanel.setupGame();
         gameWorldPanel.startGameThread(); // Start the gamframe
     }
     

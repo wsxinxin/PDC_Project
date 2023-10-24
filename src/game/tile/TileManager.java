@@ -26,10 +26,10 @@ public class TileManager {
     public TileManager(GameWorldPanel gwp) {
         this.gwp = gwp;
         tile = new Tile[30];
-        mapTileNum = new int[gwp.maxScreenCol][gwp.maxScreenRow];
+        mapTileNum = new int[gwp.maxWorldCol][gwp.maxWorldRow];
         
         getTileImage();
-        loadMap();
+        loadMap("map/worldmap1.txt");
     }
     
     public void getTileImage(){
@@ -52,10 +52,12 @@ public class TileManager {
         setup(15, "wall-0002", true);
         setup(16, "wall-0003", true);
         setup(17, "wall-0004", true);
-        setup(18, "wall-0005", true);
-        setup(19, "wall-0006", true);
-        setup(20, "wall-0007", true);
-        setup(21, "wall-0008", true);      
+        setup(18, "corner_wall-0001", true);
+        setup(19, "corner_wall-0002", true);
+        setup(20, "corner_wall-0003", true);
+        setup(21, "corner_wall-0004", true);
+        setup(22, "water", true);
+        setup(23, "bridge", false);
     }
     
     public void setup(int index, String imageName, boolean collision) {
@@ -72,27 +74,27 @@ public class TileManager {
         }
     }  
     
-    public void loadMap() {
+    public void loadMap(String fileName) {
         
         try {
-            InputStream is = getClass().getResourceAsStream("/res/map/map.txt");
+            InputStream is = getClass().getResourceAsStream("/res/"+fileName);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             
             int col = 0;
             int row = 0;
             
-            while (col < gwp.maxScreenCol && row < gwp.maxScreenRow) {
+            while (col < gwp.maxWorldCol && row < gwp.maxWorldRow) {
                 
                 String line = br.readLine();
                 
-                while (col < gwp.maxScreenCol) {
+                while (col < gwp.maxWorldCol) {
                     String numbers[] = line.split(" ");
                     
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     col++;
                 }
-                if (col == gwp.maxScreenCol) {
+                if (col == gwp.maxWorldCol) {
                     col = 0;
                     row++;
                 }
@@ -106,28 +108,35 @@ public class TileManager {
     
     public void draw(Graphics2D g2) {
         
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while (col < gwp.maxScreenCol && row < gwp.maxScreenRow) {
+        while (worldCol < gwp.maxWorldCol && worldRow < gwp.maxWorldRow) {
             
-            int tileNum = mapTileNum[col][row];
+            int tileNum = mapTileNum[worldCol][worldRow];
             
-            g2.drawImage(tile[tileNum].image, x, y, null);
-            col++;
-            x += gwp.tileSize;
+            int worldX = worldCol * gwp.tileSize;
+            int worldY = worldRow * gwp.tileSize;
+            int screenX = worldX - gwp.player.worldX + gwp.player.screenX;
+            int screenY = worldY - gwp.player.worldY + gwp.player.screenY;
             
-            if (col == gwp.maxScreenCol) {
-                col = 0;
-                x = 0;
-                row++;
-                y += gwp.tileSize;
+            if (worldX + gwp.tileSize > gwp.player.worldX - gwp.player.screenX &&
+                worldX - gwp.tileSize < gwp.player.worldX + gwp.player.screenX &&
+                worldY + gwp.tileSize > gwp.player.worldY - gwp.player.screenY &&
+                worldY - gwp.tileSize < gwp.player.worldY + gwp.player.screenY) {
+                
+                g2.drawImage(tile[tileNum].image, screenX, screenY, null);   
+            }
+            
+            worldCol++;
+       
+            if (worldCol == gwp.maxWorldCol) {
+                worldCol = 0;
+                worldRow++;
             }
         } 
         
-        // Cities in ruines 
+        /*// Cities in ruines 
         g2.drawImage(tile[5].image, 576, 0, null);
         g2.drawImage(tile[5].image, 624, 0, null);
         g2.drawImage(tile[5].image, 480, 48, null);
@@ -142,7 +151,7 @@ public class TileManager {
         g2.drawImage(tile[5].image, 384,432, null);
         g2.drawImage(tile[5].image, 336,480, null);
         
-        /*// Lockdown Walls
+        // Lockdown Walls
         g2.drawImage(tile[18].image, 0,0, null);
         g2.drawImage(tile[14].image, 96,0, null);
         g2.drawImage(tile[14].image, 144,0, null);
