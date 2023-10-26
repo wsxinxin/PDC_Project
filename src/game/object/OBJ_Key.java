@@ -31,7 +31,7 @@ public class OBJ_Key extends Entity {
     @Override
     public boolean use(Entity entity) {
         
-        int objIndex = getDetected(entity, gwp.obj, "Chain_Door");
+        int objIndex = getDetected(entity, gwp.obj, "ChainDoor");
         
         if(objIndex != 999) {
             gwp.obj[objIndex] = null;

@@ -163,7 +163,7 @@ public class Entity {
         int col = nextWorldX/gwp.tileSize;
         int row = nextWorldY/gwp.tileSize;
         
-        for (int i = 0; i < target[1].length; i++) {
+        for (int i = 0; i < target.length; i++) {
             if (target[i] != null) {
                 if (target[i].getCol() == col && target[i].getRow() == row && target[i].name.equals(targetName)) {
                     index = 1;

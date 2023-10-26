@@ -103,7 +103,10 @@ public final class Player extends Entity{
     @Override
     public void update() {
         
-        if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
+        if (attacking == true) {
+            attacking();
+        }
+        else if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
         
             if (keyH.upPressed == true) {
                 direction = "up";

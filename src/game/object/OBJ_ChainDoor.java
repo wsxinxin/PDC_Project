@@ -21,7 +21,7 @@ public class OBJ_ChainDoor extends Entity {
         this.gwp = gwp;
         
         type = type_obstacle;
-        name = "Chain_Door";
+        name = "ChainDoor";
         down1 = setup("objects/chain_door", gwp.tileSize, gwp.tileSize);
         collision = true;
         

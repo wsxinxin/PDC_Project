@@ -72,6 +72,7 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }    
+        
     }
     public void pauseState(int code) {
         if(code == KeyEvent.VK_P) {                
@@ -105,6 +106,7 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_ENTER) {
             gwp.player.selectItem();
         }
+        
     }
 
     @Override
@@ -124,5 +126,6 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_D){
             rightPressed = false;
         }
+        
     }   
 }
