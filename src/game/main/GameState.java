@@ -3,12 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package game.main;
+
 /**
  * @author Andrew Wang 18045290
  * @author Christian Costa Gomes Jorge 21139803
  * COMP603
- * Assignment1
+ * Assignment2
  */
+
 import game.interfaces.Function;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

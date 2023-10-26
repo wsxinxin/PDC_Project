@@ -4,17 +4,20 @@
  */
 package game.window;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import java.awt.event.*;
 
-/**
- *
- * @author chris
- */
 public class KeyHandler implements KeyListener{
 
     GameWorldPanel gwp;
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
 
     public KeyHandler(GameWorldPanel gwp) {
         this.gwp = gwp;
@@ -26,30 +29,81 @@ public class KeyHandler implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent ke) {
+        
         int code = ke.getKeyCode();
         
-        if(code == KeyEvent.VK_W){
-            upPressed = true;
+        // PLAY STATE
+        if (gwp.playState == gwp.gameState) {
+            playState(code);
         }
-        if(code == KeyEvent.VK_S){
+        // PAUSE STATE
+        else if (gwp.gameState == gwp.pauseState) {
+            pauseState(code);
+        }
+        // CHARACTER STATE
+        else if (gwp.gameState == gwp.characterState) {
+            characterState(code);
+        }
+    }
+    
+    public void playState(int code) {
+              
+        if(code == KeyEvent.VK_W) {
+        upPressed = true;
+        }
+        if(code == KeyEvent.VK_S) {
             downPressed = true;
         }
-        if(code == KeyEvent.VK_A){
+        if(code == KeyEvent.VK_A) {
             leftPressed = true;
         }
-        if(code == KeyEvent.VK_D){
+        if(code == KeyEvent.VK_D) {
             rightPressed = true;
         }
-        if(code == KeyEvent.VK_P){
-            if (gwp.gameState == gwp.playState){
-                gwp.gameState = gwp.pauseState;
-            }
-            else if (gwp.gameState == gwp.pauseState){
-                gwp.gameState = gwp.playState;
-            }
+        if(code == KeyEvent.VK_P) {                
+           gwp.gameState = gwp.pauseState;
+        }
+        if (code == KeyEvent.VK_I) {
+            gwp.gameState = gwp.characterState;
         }
         if (code == KeyEvent.VK_ESCAPE) {
             gwp.executeGameMenu(); // Call the method to execute the menu
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }    
+    }
+    public void pauseState(int code) {
+        if(code == KeyEvent.VK_P) {                
+            gwp.gameState = gwp.playState;
+        }
+    }
+    public void characterState(int code) {
+        if(code == KeyEvent.VK_I) {                
+            gwp.gameState = gwp.playState;
+        }
+        if(code == KeyEvent.VK_W) {
+            if(gwp.ui.slotRow != 0) {
+                gwp.ui.slotRow--;
+            }
+        }
+        if(code == KeyEvent.VK_A) {
+            if(gwp.ui.slotCol != 0) {
+                gwp.ui.slotCol--;
+            }
+        }
+        if(code == KeyEvent.VK_S) {
+            if(gwp.ui.slotRow != 3) {
+                gwp.ui.slotRow++;
+            }
+        }
+        if(code == KeyEvent.VK_D) {
+            if(gwp.ui.slotCol != 4) {
+                gwp.ui.slotCol++;
+            }
+        }
+        if(code == KeyEvent.VK_ENTER) {
+            gwp.player.selectItem();
         }
     }
 

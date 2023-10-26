@@ -4,13 +4,16 @@
  */
 package game.tile;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author Christian
- */
 public class UtilityTool {
     
     public BufferedImage scaleImage(BufferedImage original, int width, int height){

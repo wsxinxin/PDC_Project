@@ -4,13 +4,17 @@
  */
 package game.tile;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import game.monster.Monster;
+import game.object.*;
 import game.window.GameWorldPanel;
 
-/**
- *
- * @author Christian
- */
 public class AssetSetter {
    
     GameWorldPanel gwp;
@@ -19,18 +23,33 @@ public class AssetSetter {
         this.gwp = gwp;
     }
     
-    public void setMonster(){
+    public void setObject() {
         
-        gwp.monster[0] = new Monster(gwp);
-        gwp.monster[0].worldX = gwp.tileSize*24;
-        gwp.monster[0].worldY = gwp.tileSize*22;
+        int i = 0;
+        gwp.obj[i] = new OBJ_Key(gwp);
+        gwp.obj[i].worldX = gwp.tileSize*19;
+        gwp.obj[i].worldY = gwp.tileSize*18;
+        i++;
+        gwp.obj[i] = new OBJ_Key(gwp);
+        gwp.obj[i].worldX = gwp.tileSize*20;
+        gwp.obj[i].worldY = gwp.tileSize*18;
+        i++;
+        gwp.obj[i] = new OBJ_ChainDoor(gwp);
+        gwp.obj[i].worldX = gwp.tileSize*26;
+        gwp.obj[i].worldY = gwp.tileSize*25;
+        i++;
+    }
+    
+    public void setMonster() {
         
-        gwp.monster[1] = new Monster(gwp);
-        gwp.monster[1].worldX = gwp.tileSize*28;
-        gwp.monster[1].worldY = gwp.tileSize*27;
-        
-        /*gwp.monster[2] = new Monster(gwp);
-        gwp.monster[2].worldX = gwp.tileSize*15;
-        gwp.monster[2].worldY = gwp.tileSize*7;*/
+        int i = 0;
+        gwp.monster[i] = new Monster(gwp);
+        gwp.monster[i].worldX = gwp.tileSize*24;
+        gwp.monster[i].worldY = gwp.tileSize*22;
+        i++;
+        gwp.monster[i] = new Monster(gwp);
+        gwp.monster[i].worldX = gwp.tileSize*28;
+        gwp.monster[i].worldY = gwp.tileSize*27;
+        i++;
     }
 }

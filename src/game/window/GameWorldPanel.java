@@ -4,6 +4,13 @@
  */
 package game.window;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import game.entity.Entity;
 import game.entity.Player;
 import game.tile.AssetSetter;
@@ -17,10 +24,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.*;
 
-/**
- *
- * @author chris
- */
 public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
    
     //SCREEN SETTINGS
@@ -52,7 +55,8 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     Thread gameThread;
     
     // Entities and Objects
-    public Player player = new Player(this, keyH);;
+    public Player player = new Player(this, keyH);
+    public Entity obj[] = new Entity[10];
     public Entity monster[] = new Entity[5];
     ArrayList<Entity> entityList = new ArrayList<>();
     
@@ -60,6 +64,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int characterState = 3;
     
     public GameWorldPanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
@@ -68,12 +73,13 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
-    public void setupGame(){
+    public void setupGame() {
+        aSetter.setObject();
         aSetter.setMonster();
         gameState = playState;
     }
 
-    public void startGameThread(){
+    public void startGameThread() {
         gameThread = new Thread(this); // instanciate the thread
         gameThread.start(); //automatically calls run method
     }
@@ -116,10 +122,16 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         if (gameState == playState) {
             //PLAYER
             player.update();
+            
             //MONSTER
             for (int i = 0; i < monster.length; i++) {
                 if (monster[i] != null) {
-                    monster[i].update();
+                    if (monster[i].alive = true && monster[i].dying == false) {
+                        monster[i].update();
+                    }
+                    if (monster[i].alive = false) {
+                        monster[i] = null;
+                    }
                 }
             }
         } 
@@ -139,7 +151,14 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         tileM.draw(g2);
         
         // ADD ENTITIES TO THE LIST
+        
         entityList.add(player);
+        
+        for(int i = 0; i < obj.length; i++) {
+            if (obj[i] != null) {
+                entityList.add(obj[i]);
+            }
+        }
         
         for(int i = 0; i < monster.length; i++) {
             if (monster[i] != null) {
@@ -163,9 +182,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
             entityList.get(i).draw(g2);
         }
         // EMPTY EMTITY LIST
-        for (int i = 0; i < entityList.size(); i++) {
-            entityList.remove(i);
-        }
+        entityList.clear();
         
         // UI
         ui.draw(g2);
@@ -184,21 +201,6 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);   
     }
-    
-    /*public void executeGameBattle() {
-        // Create a JFrame to display the game battle 
-        JFrame frame = new JFrame("Game Battle");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setResizable(false);
-        
-        gbp = new GameBattlePanel();
-        frame.add(gbp);
-        
-        frame.pack();
-        
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);   
-    }*/
       
     @Override
     public void keyTyped(KeyEvent ke) {

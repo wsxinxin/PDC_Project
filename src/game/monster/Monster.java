@@ -4,22 +4,30 @@
  */
 package game.monster;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import game.entity.Entity;
 import game.window.GameWorldPanel;
 import java.util.Random;
 
-/**
- *
- * @author Christian
- */
-public class Monster extends Entity{
+public class Monster extends Entity {
 
+    GameWorldPanel gwp;
+    
     public Monster(GameWorldPanel gwp) {
         super(gwp);
         
+        this.gwp = gwp;
+        
+        type = type_monster;
         name = "Gloon";
         speed = 1;
-        maxHP = 4;
+        maxHP = 10;
         hp = maxHP;
         
         solidArea.x = 8;
@@ -34,18 +42,18 @@ public class Monster extends Entity{
     
     public void getImage() {
         
-        up1 = setup("monstersprites/Goons");
-        up2 = setup("monstersprites/Goons");
-        up3 = setup("monstersprites/Goons");
-        down1 = setup("monstersprites/Goons");
-        down2 = setup("monstersprites/Goons");
-        down3 = setup("monstersprites/Goons");
-        left1 = setup("monstersprites/Goons");
-        left2 = setup("monstersprites/Goons");
-        left3 = setup("monstersprites/Goons");
-        right1 = setup("monstersprites/Goons");
-        right2 = setup("monstersprites/Goons");
-        right3 = setup("monstersprites/Goons");
+        up1 = setup("monstersprites/Goons", gwp.tileSize, gwp.tileSize);
+        up2 = setup("monstersprites/Goons-0001", gwp.tileSize, gwp.tileSize);
+        up3 = setup("monstersprites/Goons-0002", gwp.tileSize, gwp.tileSize);
+        down1 = setup("monstersprites/Goons", gwp.tileSize, gwp.tileSize);
+        down2 = setup("monstersprites/Goons-0001", gwp.tileSize, gwp.tileSize);
+        down3 = setup("monstersprites/Goons-0002", gwp.tileSize, gwp.tileSize);
+        left1 = setup("monstersprites/Goons", gwp.tileSize, gwp.tileSize);
+        left2 = setup("monstersprites/Goons-0001", gwp.tileSize, gwp.tileSize);
+        left3 = setup("monstersprites/Goons-0002", gwp.tileSize, gwp.tileSize);
+        right1 = setup("monstersprites/Goons", gwp.tileSize, gwp.tileSize);
+        right2 = setup("monstersprites/Goons-0001", gwp.tileSize, gwp.tileSize);
+        right3 = setup("monstersprites/Goons-0002", gwp.tileSize, gwp.tileSize);
     }
     
     @Override
@@ -74,4 +82,10 @@ public class Monster extends Entity{
         }
     }
     
+    @Override
+    public void damageReaction() {
+        
+        actionLockCounter = 0;
+        direction = gwp.player.direction;
+    }
 }

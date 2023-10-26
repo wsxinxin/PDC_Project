@@ -5,9 +5,12 @@
 package game.database;
 
 /**
- *
- * @author wangs
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
  */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;

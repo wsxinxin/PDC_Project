@@ -4,7 +4,13 @@
  */
 package game.tile;
 
-import game.entity.Player;
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import game.window.GameWorldPanel;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -13,15 +19,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author chris
- */
 public class TileManager {
     GameWorldPanel gwp;
     Tile[]tile;
-    int mapTileNum[][]; 
-    int Arena1;
+    int mapTileNum[][];
 
     public TileManager(GameWorldPanel gwp) {
         this.gwp = gwp;
@@ -39,7 +40,7 @@ public class TileManager {
         setup(2, "infected_grass-0002", true);
         setup(3, "infected_grass-0003", false);
         setup(4, "water-polluted", true);
-        setup(5, "ruines-0001", true);
+        setup(5, "city_ruins", true);
         setup(6, "water-transition-0001", true);
         setup(7, "water-transition-0002", true);
         setup(8, "water-0001", true);
@@ -134,36 +135,6 @@ public class TileManager {
                 worldCol = 0;
                 worldRow++;
             }
-        } 
-        
-        /*// Cities in ruines 
-        g2.drawImage(tile[5].image, 576, 0, null);
-        g2.drawImage(tile[5].image, 624, 0, null);
-        g2.drawImage(tile[5].image, 480, 48, null);
-        g2.drawImage(tile[5].image, 624, 48, null);
-        g2.drawImage(tile[5].image, 672, 48, null);
-        g2.drawImage(tile[5].image, 480, 96, null);
-        g2.drawImage(tile[5].image, 528, 96, null);
-        g2.drawImage(tile[5].image, 576, 144, null);
-        g2.drawImage(tile[5].image, 624, 144, null);
-        
-        g2.drawImage(tile[5].image, 336,432, null);
-        g2.drawImage(tile[5].image, 384,432, null);
-        g2.drawImage(tile[5].image, 336,480, null);
-        
-        // Lockdown Walls
-        g2.drawImage(tile[18].image, 0,0, null);
-        g2.drawImage(tile[14].image, 96,0, null);
-        g2.drawImage(tile[14].image, 144,0, null);
-        g2.drawImage(tile[14].image, 192,0, null);
-        g2.drawImage(tile[14].image, 240,0, null);        
-        g2.drawImage(tile[14].image, 288,0, null);
-        g2.drawImage(tile[14].image, 336,0, null);
-        g2.drawImage(tile[14].image, 384,0, null);      
-        g2.drawImage(tile[14].image, 432,0, null);      
-        g2.drawImage(tile[14].image, 480,0, null);      
-        g2.drawImage(tile[14].image, 528,0, null);      
-        g2.drawImage(tile[14].image, 672,0, null);      
-        g2.drawImage(tile[19].image, 720,0, null);*/
+        }        
     }
 }

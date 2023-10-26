@@ -7,12 +7,14 @@ package game.tile;
 import java.awt.image.BufferedImage;
 
 /**
- *
- * @author chris
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
  */
+
 public class Tile {
     
     public BufferedImage image;
-    public boolean collision = false;
-    
+    public boolean collision = false;   
 }

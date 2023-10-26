@@ -4,20 +4,41 @@
  */
 package game.object;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import game.entity.Entity;
 import game.window.GameWorldPanel;
 
-/**
- *
- * @author Christian
- */
-public class OBJ_Key extends Entity{
+public class OBJ_Key extends Entity {
     
-    public OBJ_Key(GameWorldPanel gwp){
-        super(gwp);   
+    GameWorldPanel gwp;
+    
+    public OBJ_Key(GameWorldPanel gwp) {
+        super(gwp);  
         
+        this.gwp = gwp;
+        
+        type = type_consumable;
         name = "Key";
-        down1 = setup("objects/key");
+        down1 = setup("objects/key", gwp.tileSize, gwp.tileSize);
+        description = "[" + name + "]\n open the bridge's\n chains door";
+    }
+    @Override
+    public boolean use(Entity entity) {
         
+        int objIndex = getDetected(entity, gwp.obj, "Chain_Door");
+        
+        if(objIndex != 999) {
+            gwp.obj[objIndex] = null;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

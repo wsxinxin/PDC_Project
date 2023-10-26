@@ -4,39 +4,53 @@
  */
 package game.tile;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
+import game.entity.Entity;
+import game.object.OBJ_Heart;
 import game.window.GameWorldPanel;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.text.DecimalFormat;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-/**
- *
- * @author Christian
- */
 public class UI {
     
     GameWorldPanel gwp;
     Graphics2D g2;
-    Font arial_40, arial_80B;
+    Font arial_40;
+    BufferedImage heart_full, heart_half, heart_empty;
     public boolean messageOn = false;
-    public String message = "";
-    int messageCounter = 0;
+    ArrayList<String> message = new ArrayList<>();
+    ArrayList<Integer> messageCounter = new ArrayList<>();
     public boolean gameFinished = false;
-    double playTime;
-    DecimalFormat dFormat = new DecimalFormat("#0.00");
-
+    public int slotCol = 0;
+    public int slotRow = 0;
+    
     public UI(GameWorldPanel gwp) {
         this.gwp = gwp;
         
         arial_40 = new Font("Arial", Font.PLAIN, 40);
-        arial_80B = new Font("Arial", Font.BOLD, 80);
+        
+        // CREATE HUD OBJECT
+        Entity heart = new OBJ_Heart(gwp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_empty = heart.image3;
     }
     
-    public void showMessage(String text){
+    public void addMessage(String text){
         
-        message = text;
-        messageOn = true;
+        message.add(text);
+        messageCounter.add(0);
+        
     }
     
     public void draw(Graphics2D g2){
@@ -45,14 +59,53 @@ public class UI {
         g2.setFont(arial_40);
         g2.setColor(Color.white);
         
-        if (gwp.gameState == gwp.playState){
-            // Do playState stuff later
+        // PLAY STATE
+        if (gwp.gameState == gwp.playState) {
+            drawMessage();
+            drawPlayerLife();
         }
-        if (gwp.gameState == gwp.pauseState){
+        // PAUSE STATE
+        if (gwp.gameState == gwp.pauseState) {
+            drawPlayerLife();
             drawPauseScreen();
         }
+        // CHARACTER STATE
+        if (gwp.gameState == gwp.characterState) {
+            drawPlayerLife();
+            drawInventory();
+        }
     }
-    public void drawPauseScreen(){
+    
+    public void drawPlayerLife() {
+        
+        int x = gwp.tileSize/2;
+        int y = gwp.tileSize/2;
+        int i = 0;
+        
+        // DRAW MAX HP 
+        while (i < gwp.player.maxHP/2) {
+            g2.drawImage(heart_empty, x, y, null);
+            i++;
+            x += gwp.tileSize; 
+        }
+        
+        // RESET
+        x = gwp.tileSize/2;
+        y = gwp.tileSize/2;
+        i = 0;
+        
+        // DRAW CURRENT HP
+        while (i < gwp.player.hp) {
+            g2.drawImage(heart_half, x, y, null);  
+            i++;
+            if (i < gwp.player.hp) {
+                g2.drawImage(heart_full, x, y, null);
+            }
+            i++;
+            x += gwp.tileSize;        
+        }
+    }
+    public void drawPauseScreen() {
         
         String text = "PAUSED";
         int x = getXforCenteredText(text);
@@ -60,7 +113,108 @@ public class UI {
         
         g2.drawString(text, x, y);
     }
-    public int getXforCenteredText(String text){
+    public void drawInventory() {
+        
+        // FRAME
+        int frameX = gwp.tileSize*9;
+        int frameY = gwp.tileSize;       
+        int frameWidth = gwp.tileSize*6;
+        int frameHeight = gwp.tileSize*5;
+        drawSubWindow(frameX,frameY,frameWidth,frameHeight);
+        
+        // SLOT
+        final int slotXstart = frameX + 20;
+        final int slotYstart = frameY + 20;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+        int slotSize = gwp.tileSize + 3;
+        
+        // DRAW PLAYER'S ITEMS
+        for (int i = 0; i < gwp.player.inventory.size(); i++) {
+            g2.drawImage(gwp.player.inventory.get(i).down1, slotX, slotY, null);
+            
+            slotX += slotSize;
+            
+            if (i == 4 || i == 14) {
+                slotX = slotXstart;
+                slotY += slotSize;
+            }
+        }
+        
+        // CURSOR
+        int cursorX = slotXstart + (slotSize * slotCol);
+        int cursorY = slotYstart + (slotSize * slotRow);
+        int cursorWidth = gwp.tileSize;
+        int cursorHeight = gwp.tileSize;
+        
+        // DRAW CURSOR
+        g2.setColor(Color.white);
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);  
+        
+        // DESCRIPTION FRAME
+        int dFrameX = frameX;
+        int dFrameY = frameY + frameHeight;
+        int dFrameWidth = frameWidth;
+        int dFrameHeight = gwp.tileSize*3;
+        
+        // DRAW DESCRIPTION TEXT
+        int textX = dFrameX + 20;
+        int textY = dFrameY + gwp.tileSize;
+        g2.setFont(g2.getFont().deriveFont(28F));
+        
+        int itemIndex = getItemIndexOnSlot();
+        
+        if (itemIndex < gwp.player.inventory.size()) {
+            
+            drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+            
+            for(String line : gwp.player.inventory.get(itemIndex).description.split("\n")) {
+                
+                g2.drawString(line, textX, textY);
+                textY += 32;
+            }
+        }
+    }
+    public int getItemIndexOnSlot() {
+        int itemIndex = slotCol + (slotRow*5);
+        return itemIndex;
+    } 
+    public void drawMessage() {
+        int messageX = gwp.tileSize;
+        int messageY = gwp.tileSize*4;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
+        
+        for(int i = 0; i <message.size(); i++) {
+            
+            if (message.get(i) != null) {
+                
+                g2.setColor(Color.black);
+                g2.drawString(message.get(i), messageX+2, messageY+2);
+                g2.setColor(Color.white);
+                g2.drawString(message.get(i), messageX, messageY);
+                
+                int counter = messageCounter.get(i) + 1; // messageCounter++
+                messageCounter.set(i, counter); // set the counter to the array
+                messageY += 50;
+                
+                if (messageCounter.get(i) > 180) {
+                    message.remove(i);
+                    messageCounter.remove(i);
+                }
+            }
+        }
+    }
+    public void drawSubWindow(int x, int y, int width, int height) {
+       
+        g2.setColor(new Color (0,0,0, 210));
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+        
+        g2.setColor(new Color (255,255,255));
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25); 
+    }
+    public int getXforCenteredText(String text) {
         
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gwp.screenWidth/2 - length/2;

@@ -4,16 +4,20 @@
  */
 package game.database;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import game.window.GameWorldPanel;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-/**
- *
- * @author andrewwang
- */
+
 public class gameCreateDatabase 
 {
     private final gameDBManager dbManager;
