@@ -123,6 +123,9 @@ public final class Player extends Entity{
             else if (keyH.enterPressed = true) {
                 attacking = true;
             }
+            else if (keyH.enterPressed = true) {
+                attacking = true;
+            }
             
             // CHECK TILE COLLISION
             collisionOn = false;
