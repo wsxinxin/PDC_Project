@@ -211,7 +211,7 @@ public class Entity {
             }
             
             // Monster HP bar
-            if (type == 2 && hpBarOn == true) {
+            if (type == type_monster && hpBarOn == true) {
                 
                 double oneScale = (double)gwp.tileSize/maxHP;
                 double hpBarValue = oneScale*hp;
