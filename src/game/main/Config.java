@@ -59,6 +59,8 @@ public class Config {
             br.close();
         }   catch (Exception e){
             e.printStackTrace();
-        }  
+
+        }
+
     }
 }
