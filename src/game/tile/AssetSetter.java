@@ -26,14 +26,6 @@ public class AssetSetter {
     public void setObject() {
         
         int i = 0;
-        gwp.obj[i] = new OBJ_Key(gwp);
-        gwp.obj[i].worldX = gwp.tileSize*19;
-        gwp.obj[i].worldY = gwp.tileSize*18;
-        i++;
-        gwp.obj[i] = new OBJ_Key(gwp);
-        gwp.obj[i].worldX = gwp.tileSize*20;
-        gwp.obj[i].worldY = gwp.tileSize*18;
-        i++;
         gwp.obj[i] = new OBJ_ChainDoor(gwp);
         gwp.obj[i].worldX = gwp.tileSize*26;
         gwp.obj[i].worldY = gwp.tileSize*25;
@@ -50,6 +42,14 @@ public class AssetSetter {
         gwp.monster[i] = new Monster(gwp);
         gwp.monster[i].worldX = gwp.tileSize*28;
         gwp.monster[i].worldY = gwp.tileSize*27;
+        i++;
+        gwp.monster[i] = new Monster(gwp);
+        gwp.monster[i].worldX = gwp.tileSize*23;
+        gwp.monster[i].worldY = gwp.tileSize*19;
+        i++;
+        gwp.monster[i] = new Monster(gwp);
+        gwp.monster[i].worldX = gwp.tileSize*28;
+        gwp.monster[i].worldY = gwp.tileSize*20;
         i++;
     }
 }

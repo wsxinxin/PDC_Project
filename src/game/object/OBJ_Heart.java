@@ -14,13 +14,27 @@ package game.object;
 import game.entity.Entity;
 import game.window.GameWorldPanel;
 
-public class OBJ_Heart extends Entity{
+public class OBJ_Heart extends Entity {
+    
+    GameWorldPanel gwp;
+    
     public OBJ_Heart(GameWorldPanel gwp) {
         super(gwp); 
         
+        this.gwp = gwp;
+        
+        type = type_pickupOnly;
         name = "Heart";
+        value = 2;
+        down1 = setup("objects/heart_full", gwp.tileSize, gwp.tileSize);
         image = setup("objects/heart_full", gwp.tileSize, gwp.tileSize);
         image2 = setup("objects/heart_half", gwp.tileSize, gwp.tileSize);
         image3 = setup("objects/heart_empty", gwp.tileSize, gwp.tileSize);
+    }
+    @Override
+    public boolean use(Entity entity) {
+        gwp.ui.addMessage("Life +" + value);
+        entity.hp += value;
+        return true;
     }
 }

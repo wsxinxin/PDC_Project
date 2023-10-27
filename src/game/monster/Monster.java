@@ -12,6 +12,7 @@ package game.monster;
  */
 
 import game.entity.Entity;
+import game.object.*;
 import game.window.GameWorldPanel;
 import java.util.Random;
 
@@ -87,5 +88,23 @@ public class Monster extends Entity {
         
         actionLockCounter = 0;
         direction = gwp.player.direction;
+    }
+    @Override
+    public void checkDrop() {
+        
+        // CAST A DIE
+        int i = new Random().nextInt(10)+1;
+        
+        // SET THE MONSTER DROP
+        if (i < 6) {
+            dropItem(new OBJ_Heart(gwp));
+        }
+        if (i >= 6 && i < 8) {
+            dropItem(new OBJ_Key(gwp));
+        }
+        if (i >= 8 && i < 10) {
+            dropItem(new OBJ_Key(gwp));
+            dropItem(new OBJ_Potion(gwp));  
+        }
     }
 }

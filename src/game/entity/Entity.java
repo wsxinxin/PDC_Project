@@ -55,6 +55,7 @@ public class Entity {
     public int speed;
     public int maxHP;
     public int hp;
+    public int value;
     
     //TYPE
     public int type;
@@ -62,6 +63,7 @@ public class Entity {
     public final int type_monster = 1;
     public final int type_consumable = 2;
     public final int type_obstacle = 3;
+    public final int type_pickupOnly = 4;
    
     // ITEM ATTRIBUTES
     public String description = "";
@@ -88,11 +90,23 @@ public class Entity {
     public int getRow() {
         return (worldY + solidArea.y)/gwp.tileSize;
     }
-    public void setAction(){}
-    public void damageReaction(){}
+    public void setAction() {}
+    public void damageReaction() {}
     public void interact() {}
     public boolean use(Entity entity) {return false;}
-    public void update(){
+    public void checkDrop() {}
+    public void dropItem(Entity droppedItem) {
+        
+        for (int i = 0; i < gwp.obj.length; i++) {
+            if (gwp.obj[i] == null) {
+                gwp.obj[i] = droppedItem;
+                gwp.obj[i].worldX = worldX; // the dead monster's worldX
+                gwp.obj[i].worldY = worldY; // the dead monster's worldY
+                break;
+            }
+        }
+    }      
+    public void update() {
         
         setAction();
         
@@ -238,8 +252,7 @@ public class Entity {
             if (dying == true) {
                 dyingAnimation(g2);
             }
-            g2.drawImage(image, screenX, screenY, gwp.tileSize, gwp.tileSize, null);
-           
+            g2.drawImage(image, screenX, screenY, null);
             changeAlpha(g2, 1f);
         }
     }

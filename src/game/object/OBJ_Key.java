@@ -35,6 +35,7 @@ public class OBJ_Key extends Entity {
         
         if(objIndex != 999) {
             gwp.obj[objIndex] = null;
+            gwp.obj[0] = null;
             return true;
         }
         else{

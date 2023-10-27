@@ -31,9 +31,5 @@ public class OBJ_ChainDoor extends Entity {
         solidArea.height = 48;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-    }  
-    @Override
-    public void interact() {
-        
-    }
+    } 
 }

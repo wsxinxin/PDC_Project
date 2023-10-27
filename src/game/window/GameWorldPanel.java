@@ -56,7 +56,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     
     // Entities and Objects
     public Player player = new Player(this, keyH);
-    public Entity obj[] = new Entity[10];
+    public Entity obj[] = new Entity[20];
     public Entity monster[] = new Entity[5];
     ArrayList<Entity> entityList = new ArrayList<>();
     
@@ -130,6 +130,7 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
                         monster[i].update();
                     }
                     if (monster[i].alive == false) {
+                        monster[i].checkDrop();
                         monster[i] = null;
                     }
                 }

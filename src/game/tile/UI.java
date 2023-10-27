@@ -25,7 +25,7 @@ public class UI {
     
     GameWorldPanel gwp;
     Graphics2D g2;
-    Font arial_40;
+    Font arial_20;
     BufferedImage heart_full, heart_half, heart_empty;
     public boolean messageOn = false;
     ArrayList<String> message = new ArrayList<>();
@@ -37,7 +37,7 @@ public class UI {
     public UI(GameWorldPanel gwp) {
         this.gwp = gwp;
         
-        arial_40 = new Font("Arial", Font.PLAIN, 40);
+        arial_20 = new Font("Arial", Font.PLAIN, 20);
         
         // CREATE HUD OBJECT
         Entity heart = new OBJ_Heart(gwp);
@@ -56,7 +56,7 @@ public class UI {
     public void draw(Graphics2D g2){
         this.g2 = g2;
         
-        g2.setFont(arial_40);
+        g2.setFont(arial_20);
         g2.setColor(Color.white);
         
         // PLAY STATE

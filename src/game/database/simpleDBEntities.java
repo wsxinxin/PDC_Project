@@ -22,7 +22,6 @@ public class simpleDBEntities {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
 
     public static void main(String[] args) {

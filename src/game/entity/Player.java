@@ -59,13 +59,13 @@ public final class Player extends Entity{
         direction = "down";
         
         // PLAYER STATUS
-        maxHP = 6;
+        maxHP = 10;
         hp = maxHP;
     }
     public void setItems() {
         
         inventory.clear();
-        inventory.add(new OBJ_Key(gwp));
+        inventory.add(new OBJ_Potion(gwp));
         inventory.add(new OBJ_Potion(gwp));
     } 
     public void getPlayerImage(){
@@ -173,6 +173,10 @@ public final class Player extends Entity{
                 invincibleCounter = 0;
             }
         }
+        
+        if(hp > maxHP) {
+            hp = maxHP;
+        }
     }
     public void attacking() {
         
@@ -225,6 +229,11 @@ public final class Player extends Entity{
                 if (keyH.enterPressed == true) {
                     gwp.obj[i].interact();
                 }
+            }
+            else if (gwp.obj[i].type == type_pickupOnly) {
+                
+                gwp.obj[i].use(this);
+                gwp.obj[i] = null;
             }
             else {
                 String text;
