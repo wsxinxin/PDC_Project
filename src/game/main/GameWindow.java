@@ -30,7 +30,12 @@ public class GameWindow {
         // Create the GameWorldPanel and add it to the JFrame
         GameWorldPanel gameWorldPanel = new GameWorldPanel();
         frame.add(gameWorldPanel);
-
+        
+        gamePanel.config.loadConfig();
+        if(gamePanel.FullScreenOn == true){
+            window.setUndecorated(false);
+        }
+        
         frame.pack();
 
         frame.setLocationRelativeTo(null);
