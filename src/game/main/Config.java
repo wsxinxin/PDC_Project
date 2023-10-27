@@ -4,9 +4,9 @@
  */
 package game.main;
 
+import game.window.GameWorldPanel;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,21 +16,21 @@ import java.io.IOException;
  * @author wangs
  */
 public class Config {
-    GamePanel gp;
+    GameWorldPanel gwp;
     
-    public Config(GamePanel gp){
-        this.gp = gp;
+    public Config(GameWorldPanel gwp){
+        this.gwp = gwp;
     }
     
     public void saveConfig(){
        try{
            BufferedWriter bw = new BufferedWriter(new FileWriter("config.txt"));
            //Full Screen setting
-           if(gp.fullScreenOn == true)
+           if(gwp.fullScreenOn == true)
            {
                bw.write("On");
            }
-           if(gp.fullScreenOn == false)
+           if(gwp.fullScreenOn == false)
            {
                bw.write("Off");
            }
@@ -48,10 +48,10 @@ public class Config {
             
             //FullScreen 
             if(s.equals("On")){
-                gp.fullScreenOn = true;
+                gwp.fullScreenOn = true;
             }
             if(s.equals("Off")){
-                gp.fullScreenOn = false;
+                gwp.fullScreenOn = false;
             }
             
             br.close();

@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package game.main;
-
 /**
  * @author Andrew Wang 18045290
  * @author Christian Costa Gomes Jorge 21139803
@@ -31,9 +30,9 @@ public class GameWindow {
         GameWorldPanel gameWorldPanel = new GameWorldPanel();
         frame.add(gameWorldPanel);
         
-        gamePanel.config.loadConfig();
-        if(gamePanel.FullScreenOn == true){
-            window.setUndecorated(false);
+        gameWorldPanel.config.loadConfig();
+        if(gameWorldPanel.fullScreenOn == true){
+            frame.setUndecorated(false);
         }
         
         frame.pack();

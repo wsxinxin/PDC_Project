@@ -13,6 +13,7 @@ package game.window;
 
 import game.entity.Entity;
 import game.entity.Player;
+import game.main.Config;
 import game.main.GameWindow;
 import game.tile.AssetSetter;
 import game.tile.CollisionChecker;
@@ -60,6 +61,8 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
     public CollisionChecker cChecker = new CollisionChecker(this);;
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
+    Config config = new Config(this);
+  
     Thread gameThread;
     
     // Entities and Objects
@@ -92,9 +95,9 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D)tempScreen.getGraphics(); 
         
-        /*if (fullScreenOn = true) {
+        if (fullScreenOn = true) {
             setFullScreen();
-        }*/
+        }
     }
     public void retry() {
         

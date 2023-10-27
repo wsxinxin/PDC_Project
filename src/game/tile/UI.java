@@ -381,6 +381,8 @@ public class UI {
         if (gwp.fullScreenOn == true) {
             g2.fillRect(textX, textY, 24, 24);
         }
+        
+       gwp.config.saveConfig();
     }
     public void options_fullScreenNotification(int frameX, int frameY) {
         
