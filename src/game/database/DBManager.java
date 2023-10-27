@@ -33,7 +33,7 @@ public final class DBManager {
         DBManager dbManager = new DBManager();
         System.out.println(dbManager.getConnection());
     }
-
+    
     public Connection getConnection() {
         return this.conn;
     }
@@ -50,7 +50,7 @@ public final class DBManager {
             }
         }
     }
-
+    // close connection
     public void closeConnections() {
         if (conn != null) {
             try {
@@ -60,7 +60,7 @@ public final class DBManager {
             }
         }
     }
-
+    // queryDB method
     public ResultSet queryDB(String sql) {
 
         Connection connection = this.conn;
@@ -76,7 +76,7 @@ public final class DBManager {
         }
         return resultSet;
     }
-
+    // update Database
     public void updateDB(String sql) {
 
         Connection connection = this.conn;

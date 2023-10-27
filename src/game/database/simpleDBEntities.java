@@ -20,7 +20,8 @@ public class simpleDBEntities {
     SimpleDBManager dbManager;
     Connection conn;
     Statement statement;
-
+    
+    // simple database entities
     public simpleDBEntities() {
         dbManager = new SimpleDBManager();
         conn = dbManager.getConnection();

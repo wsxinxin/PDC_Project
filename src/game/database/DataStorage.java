@@ -5,12 +5,13 @@
 package game.database;
 
 /**
- * Saving and Loading Player Stats
- * @author wangs
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
  */
 import java.io.Serializable;
-import game.entity.Entity;
-import game.entity.Player;
+
 import java.util.ArrayList;
 
 public class DataStorage implements Serializable{

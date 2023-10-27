@@ -12,8 +12,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
- * @author wangs
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
  */
 public class Config {
     GameWorldPanel gwp;

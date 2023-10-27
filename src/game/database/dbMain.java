@@ -17,7 +17,6 @@ public class dbMain {
 
         dbEntities gameDB = new dbEntities();
         gameDB.connectGameDB();
-        //gameDB.createPromotionTable();
         gameDB.createAnotherSave(gameDB.getAnotherSave());
         gameDB.closeConnection();
     }

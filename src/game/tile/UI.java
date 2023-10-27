@@ -338,7 +338,7 @@ public class UI {
         }
         
         // CONTROL
-        textY += gwp.tileSize;
+        textY += gwp.tileSize*2;
         g2.drawString("Controls", textX, textY);
         if (commandNum == 1) {
             g2.drawString(">", textX - 25, textY);
@@ -348,24 +348,10 @@ public class UI {
             }
         }
         
-        // SAVE GAME
-        textY += gwp.tileSize;
-        g2.drawString("Save Game", textX, textY);
-        if (commandNum == 2) {
-            g2.drawString(">", textX - 25, textY);
-        }
-        
-        // LOAD GAME
-        textY += gwp.tileSize;
-        g2.drawString("Load Game", textX, textY);
-        if (commandNum == 3) {
-            g2.drawString(">", textX - 25, textY);
-        }
-        
         // END GAME
-        textY += gwp.tileSize;
+        textY += gwp.tileSize*2;
         g2.drawString("Quit Game", textX, textY);
-        if (commandNum == 4) {
+        if (commandNum == 2) {
             g2.drawString(">", textX - 25, textY);
             if (gwp.keyH.enterPressed == true) {
                 subState = 3;
@@ -376,7 +362,7 @@ public class UI {
         // BACK 
         textY += gwp.tileSize*2;
         g2.drawString("Back", textX, textY);
-        if (commandNum == 5) {
+        if (commandNum == 3) {
             g2.drawString(">", textX - 25, textY);
         }
         

@@ -58,7 +58,7 @@ public final class SimpleDBManager {
             }
         }
     }
-
+    //Close connection
     public void closeConnections() {
         if (conn != null) {
             try {

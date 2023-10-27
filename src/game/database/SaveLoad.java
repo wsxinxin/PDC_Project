@@ -5,13 +5,14 @@
 package game.database;
 
 /**
- *
- * @author wangs
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
  */
 import game.entity.Entity;
 import game.object.OBJ_Potion;
 import game.object.OBJ_Key;
-import game.entity.Player;
 import game.window.GameWorldPanel;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,6 +27,7 @@ public class SaveLoad {
         this.gwp = gwp;
     }
     
+    // get objects methods
     public Entity getObject(String itemName){
        Entity obj = null; 
        
@@ -36,6 +38,7 @@ public class SaveLoad {
        return obj;
     }
     
+    // save method
     public void save(){
         try{
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File("save.dat")));
@@ -50,11 +53,11 @@ public class SaveLoad {
         //Write the DataStorage object
         oos.writeObject(ds);
         
-    } catch (Exception e){
-        System.out.println("Save Exception!");
+        } catch (Exception e) {
+            System.out.println("Save Exception!");
+        }
     }
-    }
-    
+    // load method
     public void load(){
         try{
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("save.dat")));

@@ -28,7 +28,7 @@ public class dbEntities {
         dbManager = new DBManager();
         conn = dbManager.getConnection();
     }
-
+    // connect game database
     public void connectGameDB() {
         try {
             this.statement = conn.createStatement();
@@ -41,34 +41,7 @@ public class dbEntities {
             System.out.println(ex.getMessage());
         }
     }
-/*
-    public void createPromotionTable() {
-        try{
-            /* You may need the following SQL statements for this method:
-            
-             * Create the table:
-               CREATE TABLE PROMOTION (CATEGORY VARCHAR(20), DISCOUNT INT);
-            
-             * Insert records into the table: 
-               INSERT INTO PROMOTION VALUES ('Fiction', 0),
-               ('Non-fiction', 10),
-               ('Textbook', 20);
-
-             
-            this.statement = conn.createStatement();
-            this.checkExistedTable("PROMOTION");
-            this.statement.addBatch("CREATE TABLE PROMOTION (CATEGORY VARCHAR(20), DISCOUNT INT)");
-            this.statement.addBatch("INSERT INTO PROMOTION VALUES ('Fiction', 0),\n"
-                + "('Non-fiction', 10),\n"
-                + "('Textbook', 20)");
-            this.statement.executeBatch();
-        }catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-    }
-    */
-    
+    // create another save
     public void createAnotherSave(ResultSet rs) {
         
         try {
@@ -87,16 +60,9 @@ public class dbEntities {
             System.out.println(ex.getMessage());
         }
     }
-    
+    // get the another save
     public ResultSet getAnotherSave() {
-        /* You may need the following SQL statements for this method:
-
-        * Query multiple tables:
         
-          SELECT TITLE, PRICE, DISCOUNT FROM BOOK, PROMOTION WHERE BOOK.CATEGORY=PROMOTION.CATEGORY;
-
-         */
-
         ResultSet rs = null;
         try{
             rs = this.statement.executeQuery("SELECT ITEMSINBAG, WEAPON, POTION "
@@ -108,7 +74,7 @@ public class dbEntities {
         return rs;
 
     }
-    
+    // check if the table already exist
     public void checkExistedTable(String name){
         try{
             DatabaseMetaData dbmd = this.conn.getMetaData();
