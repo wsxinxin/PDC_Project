@@ -19,7 +19,4 @@ public class DataStorage implements Serializable{
      
      //Player inventory
      ArrayList<String> itemNames = new ArrayList<>();
-     ArrayList<Integer> itemAmounts = new ArrayList<>();
-     
-     
 }
