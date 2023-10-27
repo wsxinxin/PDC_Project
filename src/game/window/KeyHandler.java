@@ -32,8 +32,12 @@ public class KeyHandler implements KeyListener{
         
         int code = ke.getKeyCode();
         
+        // TITLE STATE
+        if (gwp.titleState == gwp.gameState) {
+            titleState(code);
+        }
         // PLAY STATE
-        if (gwp.playState == gwp.gameState) {
+        else if (gwp.playState == gwp.gameState) {
             playState(code);
         }
         // PAUSE STATE
@@ -43,6 +47,36 @@ public class KeyHandler implements KeyListener{
         // CHARACTER STATE
         else if (gwp.gameState == gwp.characterState) {
             characterState(code);
+        }
+        else if (gwp.gameState == gwp.optionsState) {
+            optionsState(code);
+        }
+    }
+    
+    public void titleState(int code) {
+        
+        if (code == KeyEvent.VK_W) {
+            gwp.ui.commandNum--;
+            if (gwp.ui.commandNum < 0) {
+                gwp.ui.commandNum = 2;
+            }
+        }
+        if (code == KeyEvent.VK_S) {
+            gwp.ui.commandNum++;
+            if (gwp.ui.commandNum > 2) {
+                gwp.ui.commandNum = 0;
+            }
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            if(gwp.ui.commandNum == 0) {
+                gwp.gameState = gwp.playState;
+            }
+            if(gwp.ui.commandNum == 1) {
+                // add later
+            }
+            if(gwp.ui.commandNum == 2) {
+                System.exit(0);
+            }
         }
     }
     
@@ -66,12 +100,12 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_I) {
             gwp.gameState = gwp.characterState;
         }
-        if (code == KeyEvent.VK_ESCAPE) {
-            gwp.executeGameMenu(); // Call the method to execute the menu
-        }
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
-        }    
+        }  
+        if (code == KeyEvent.VK_ESCAPE) {
+            gwp.gameState = gwp.optionsState;
+        } 
         
     }
     public void pauseState(int code) {
@@ -105,8 +139,35 @@ public class KeyHandler implements KeyListener{
         }
         if(code == KeyEvent.VK_ENTER) {
             gwp.player.selectItem();
+        }    
+    }
+    public void optionsState(int code) {
+        
+        if (code == KeyEvent.VK_ESCAPE) {
+            gwp.gameState = gwp.playState;  
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            enterPressed = true;
         }
         
+        int maxCommandNum = 0;
+        switch(gwp.ui.subState){
+            case 0: maxCommandNum = 5; break;
+            case 3: maxCommandNum = 1; break;
+        }
+        
+        if (code == KeyEvent.VK_W) {
+            gwp.ui.commandNum--;
+            if (gwp.ui.commandNum < 0) {
+                gwp.ui.commandNum = maxCommandNum;
+            }
+        }
+        if (code == KeyEvent.VK_S) {
+            gwp.ui.commandNum++;
+            if (gwp.ui.commandNum > maxCommandNum) {
+                gwp.ui.commandNum = 0;
+            }
+        }
     }
 
     @Override

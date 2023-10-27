@@ -31,7 +31,7 @@ public class Monster extends Entity {
         maxHP = 10;
         hp = maxHP;
         
-        solidArea.x = 8;
+        solidArea.x = 16;
         solidArea.y = 16;
         solidArea.width = 32;
         solidArea.height = 32;

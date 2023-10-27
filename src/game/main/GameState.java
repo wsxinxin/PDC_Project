@@ -55,19 +55,4 @@ public class GameState implements Function
         return gameData.toString();
     }
     
-    /*public static void main(String args[]) {
-        // Create an instance of the GameState class
-        GameState gameState = new GameState();
-
-        // Test Usage
-        String saveGameState = "PlayerName: Andrew\nLevel: 10\nWave: 3";
-        String fileName = "./SaveFiles/SavedState1.txt";
-
-        // Saving game state to the text file
-        gameState.saveGameState(fileName, saveGameState);
-
-        // Load the game state from the text file
-        String loadGameState = gameState.loadGameState(fileName);
-        System.out.println("Loaded Game State:\n" + loadGameState);
-    }*/
 }
