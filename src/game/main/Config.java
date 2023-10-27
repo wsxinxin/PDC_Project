@@ -21,7 +21,7 @@ public class Config {
     public Config(GameWorldPanel gwp){
         this.gwp = gwp;
     }
-    
+    // write save config in the file config.txt
     public void saveConfig(){
        try{
            BufferedWriter bw = new BufferedWriter(new FileWriter("config.txt"));
@@ -36,11 +36,13 @@ public class Config {
            }
            bw.newLine();
            
+           bw.close();
+           
        } catch (IOException e){
            e.printStackTrace();
        }
     }
-    
+    // load the config from the file config.txt
     public void loadConfig() {
         try{
             BufferedReader br = new BufferedReader(new FileReader("config.txt"));
@@ -57,7 +59,6 @@ public class Config {
             br.close();
         }   catch (Exception e){
             e.printStackTrace();
-        }
-        
+        }  
     }
 }

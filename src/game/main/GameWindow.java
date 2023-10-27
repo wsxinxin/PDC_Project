@@ -24,15 +24,16 @@ public class GameWindow {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setTitle("PDC_RPGGAME");
-        //frame.setUndecorated(true);
 
         // Create the GameWorldPanel and add it to the JFrame
         GameWorldPanel gameWorldPanel = new GameWorldPanel();
         frame.add(gameWorldPanel);
         
+        // load the game options config 
         gameWorldPanel.config.loadConfig();
+        // if the config load is with enabled full screen then setUndecorated is enabled.
         if(gameWorldPanel.fullScreenOn == true){
-            frame.setUndecorated(false);
+            frame.setUndecorated(true);
         }
         
         frame.pack();

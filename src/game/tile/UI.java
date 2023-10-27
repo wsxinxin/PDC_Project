@@ -389,7 +389,7 @@ public class UI {
             g2.fillRect(textX, textY, 24, 24);
         }
         
-       gwp.config.saveConfig();
+        gwp.config.saveConfig();
     }
     // add the options full screen notification
     public void options_fullScreenNotification(int frameX, int frameY) {

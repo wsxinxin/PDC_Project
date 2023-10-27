@@ -1,7 +1,0 @@
-Noob
-100
-No weapons equipped
-Noob's Inventory: 
-Weapons: []
-Potions []
-
