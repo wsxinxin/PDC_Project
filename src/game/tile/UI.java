@@ -10,7 +10,6 @@ package game.tile;
  * COMP603
  * Assignment2
  */
-
 import game.entity.Entity;
 import game.object.OBJ_Heart;
 import game.window.GameWorldPanel;

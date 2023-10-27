@@ -19,6 +19,7 @@ import game.tile.AssetSetter;
 import game.tile.CollisionChecker;
 import game.tile.TileManager;
 import game.tile.UI;
+import game.database.SaveLoad;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
