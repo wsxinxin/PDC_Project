@@ -63,7 +63,7 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     Config config = new Config(this);
-  
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread;
     
     // Entities and Objects
