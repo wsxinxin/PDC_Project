@@ -97,10 +97,10 @@ public class Monster extends Entity {
         int i = new Random().nextInt(10)+1;
         
         // SET THE MONSTER DROP
-        if (i < 6) {
+        if (i < 4) {
             dropItem(new OBJ_Heart(gwp));
         }
-        if (i >= 6 && i < 8) {
+        if (i >= 4 && i < 8) {
             dropItem(new OBJ_Key(gwp));
         }
         if (i >= 8 && i < 10) {
