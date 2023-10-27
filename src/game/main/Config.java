@@ -36,14 +36,6 @@ public class Config {
            }
            bw.newLine();
            
-           //Music Volume
-           bw.write(String.valueOf(gp.music.volumeScale));
-           bw.newLine();
-           
-           //SE Volume
-           bw.write(String.valueOf(gp.se.volumeScale));
-           bw.newLine();
-           
        } catch (IOException e){
            e.printStackTrace();
        }
@@ -61,14 +53,6 @@ public class Config {
             if(s.equals("Off")){
                 gp.fullScreenOn = false;
             }
-            
-            //Music volume
-            s = br.readLine();
-            gp.music.volumeScale = Integer.parseInt(s);
-            
-            //SE volume
-            s = br.readLine();
-            gp.se.volumeScale = Integer.parseInt(s);
             
             br.close();
         }   catch (Exception e){
