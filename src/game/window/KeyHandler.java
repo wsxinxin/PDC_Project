@@ -51,6 +51,10 @@ public class KeyHandler implements KeyListener{
         else if (gwp.gameState == gwp.optionsState) {
             optionsState(code);
         }
+        // GAME OVER STATE
+        else if (gwp.gameState == gwp.gameOverState) {
+            gameOverState(code);
+        }
     }
     
     public void titleState(int code) {
@@ -79,7 +83,6 @@ public class KeyHandler implements KeyListener{
             }
         }
     }
-    
     public void playState(int code) {
               
         if(code == KeyEvent.VK_W) {
@@ -166,6 +169,31 @@ public class KeyHandler implements KeyListener{
             gwp.ui.commandNum++;
             if (gwp.ui.commandNum > maxCommandNum) {
                 gwp.ui.commandNum = 0;
+            }
+        }
+    }
+    public void gameOverState(int code) {
+        
+        if (code == KeyEvent.VK_W) {
+            gwp.ui.commandNum--;
+            if (gwp.ui.commandNum < 0) {
+                gwp.ui.commandNum = 1;
+            }
+        }
+        if (code == KeyEvent.VK_S) {
+            gwp.ui.commandNum++;
+            if (gwp.ui.commandNum > 1) {
+                gwp.ui.commandNum = 0;
+            }
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            if (gwp.ui.commandNum == 0) {
+                gwp.gameState = gwp.playState;
+                gwp.retry();
+            }
+            else if (gwp.ui.commandNum == 1) {
+                gwp.gameState = gwp.titleState;
+                gwp.restart();
             }
         }
     }

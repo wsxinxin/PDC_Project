@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.*;
 
-public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
+public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
    
     //SCREEN SETTINGS
     final int originalTileSize = 16; // 16x16 tile
@@ -75,8 +75,9 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
     public final int pauseState = 2;
     public final int characterState = 3;
     public final int optionsState = 4;
+    public final int gameOverState = 6;
     
-    public GameWorldPanel(){
+    public GameWorldPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
         this.setBackground(Color.black); //set the colors of the screeen
         this.setDoubleBuffered(true); // Buffer
@@ -94,6 +95,19 @@ public class GameWorldPanel extends JPanel implements Runnable,KeyListener {
         /*if (fullScreenOn = true) {
             setFullScreen();
         }*/
+    }
+    public void retry() {
+        
+        player.setDefaultPositions();
+        player.restore();
+        aSetter.setMonster();
+    }
+    public void restart() {
+        
+        player.setDefaultValues();
+        player.setItems();
+        aSetter.setObject();
+        aSetter.setMonster();  
     }
     public void setFullScreen() {
         
