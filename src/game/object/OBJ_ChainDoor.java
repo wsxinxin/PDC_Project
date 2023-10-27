@@ -8,9 +8,12 @@ import game.entity.Entity;
 import game.window.GameWorldPanel;
 
 /**
- *
- * @author Christian
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
  */
+
 public class OBJ_ChainDoor extends Entity {
     
     GameWorldPanel gwp;

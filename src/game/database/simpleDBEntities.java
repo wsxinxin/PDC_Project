@@ -4,6 +4,13 @@
  */
 package game.database;
 
+/**
+ * @author Andrew Wang 18045290
+ * @author Christian Costa Gomes Jorge 21139803
+ * COMP603
+ * Assignment2
+ */
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -40,6 +47,4 @@ public class simpleDBEntities {
     public void closeConnection() {
         this.dbManager.closeConnections();
     }
-
 }
-

@@ -62,6 +62,16 @@ public final class Player extends Entity{
         maxHP = 10;
         hp = maxHP;
     }
+    public void setDefaultPositions() {
+        worldX = gwp.tileSize*18;
+        worldY = gwp.tileSize*19;
+        direction = "down";
+    }
+    public void restore() {
+        
+        hp = maxHP;
+        invincible = false;
+    }
     public void setItems() {
         
         inventory.clear();
@@ -94,11 +104,11 @@ public final class Player extends Entity{
         attackDown1 = setup("playersprites/attacking_down", gwp.tileSize, gwp.tileSize*2);
         attackDown2 = setup("playersprites/attacking_down", gwp.tileSize, gwp.tileSize*2);
         
-        attackLeft1 = setup("playersprites/Sprite-0001", gwp.tileSize*2, gwp.tileSize);
-        attackLeft2 = setup("playersprites/Sprite-0001", gwp.tileSize*2, gwp.tileSize);
+        attackLeft1 = setup("playersprites/attacking_left", gwp.tileSize*2, gwp.tileSize);
+        attackLeft2 = setup("playersprites/attacking_left", gwp.tileSize*2, gwp.tileSize);
         
-        attackRight1 = setup("playersprites/Sprite-0001", gwp.tileSize*2, gwp.tileSize);
-        attackRight2 = setup("playersprites/Sprite-0001", gwp.tileSize*2, gwp.tileSize);
+        attackRight1 = setup("playersprites/attacking_right", gwp.tileSize*2, gwp.tileSize);
+        attackRight2 = setup("playersprites/attacking_right", gwp.tileSize*2, gwp.tileSize);
     }    
     @Override
     public void update() {
@@ -176,6 +186,9 @@ public final class Player extends Entity{
         
         if(hp > maxHP) {
             hp = maxHP;
+        }
+        if (hp <= 0) {
+            gwp.gameState = gwp.gameOverState;
         }
     }
     public void attacking() {

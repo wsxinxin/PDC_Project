@@ -54,5 +54,4 @@ public class GameState implements Function
         }
         return gameData.toString();
     }
-    
 }
