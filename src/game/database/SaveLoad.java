@@ -61,8 +61,15 @@ public class SaveLoad {
             
             //Read the DataStorage Object
             DataStorage ds = (DataStorage)ois.readObject();
+            //Player stats
             gwp.player.hp = ds.hp;
             
+            //Player inventory
+            gwp.player.inventory.clear();
+            for(int i = 0; i < ds.itemNames.size(); i++){
+                gwp.player.inventory.add(getObject(ds.itemNames.get(i)));
+               
+            }
 
         } catch (Exception e){
             System.out.println("Load Exception!");
