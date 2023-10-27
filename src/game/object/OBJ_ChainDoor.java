@@ -18,6 +18,7 @@ public class OBJ_ChainDoor extends Entity {
     
     GameWorldPanel gwp;
     
+    // Object chain door constructor 
     public OBJ_ChainDoor(GameWorldPanel gwp) {
         super(gwp);
         

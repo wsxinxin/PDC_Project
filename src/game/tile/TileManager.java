@@ -23,7 +23,7 @@ public class TileManager {
     GameWorldPanel gwp;
     Tile[]tile;
     int mapTileNum[][];
-
+    // tile manager constructor
     public TileManager(GameWorldPanel gwp) {
         this.gwp = gwp;
         tile = new Tile[30];
@@ -32,7 +32,7 @@ public class TileManager {
         getTileImage();
         loadMap("map/worldmap1.txt");
     }
-    
+    // get all game tiles
     public void getTileImage(){
         
         setup(0, "grass", false);
@@ -60,7 +60,7 @@ public class TileManager {
         setup(22, "water", true);
         setup(23, "bridge", false);
     }
-    
+    // setup method optmizes the get of the resources e.g tiles, monsters, objects
     public void setup(int index, String imageName, boolean collision) {
         UtilityTool uTool = new UtilityTool();
         
@@ -74,7 +74,7 @@ public class TileManager {
             e.printStackTrace();
         }
     }  
-    
+    // get the map file and load the tile information based in the file
     public void loadMap(String fileName) {
         
         try {
@@ -106,7 +106,7 @@ public class TileManager {
                 
         }
     }
-    
+    // render the world map 
     public void draw(Graphics2D g2) {
         
         int worldCol = 0;

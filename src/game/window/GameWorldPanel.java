@@ -81,6 +81,7 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
     public final int optionsState = 4;
     public final int gameOverState = 6;
     
+    // Panel Constructor
     public GameWorldPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight)); // set the dimension size of the game screen
         this.setBackground(Color.black); //set the colors of the screeen
@@ -88,6 +89,7 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
+    // setup what will be created the the game world 
     public void setupGame() {
         aSetter.setObject();
         aSetter.setMonster();
@@ -100,12 +102,14 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
             setFullScreen();
         }
     }
+    // retry option if the game over screen appears
     public void retry() {
         
         player.setDefaultPositions();
         player.restore();
         aSetter.setMonster();
     }
+    // quit option if the game over screen appears will restart the whole game
     public void restart() {
         
         player.setDefaultValues();
@@ -113,6 +117,7 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
         aSetter.setObject();
         aSetter.setMonster();  
     }
+    // Set Full Screen Resolution
     public void setFullScreen() {
         
         // GET LOCAL SCREEN DEVICE
@@ -124,10 +129,12 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
         screenWidth2 = GameWindow.frame.getWidth();
         screenHeight2 = GameWindow.frame.getHeight();
     }
+    // Start the character and monster threads
     public void startGameThread() {
         gameThread = new Thread(this); // instanciate the thread
         gameThread.start(); //automatically calls run method
     }
+    // Run the threads
     @Override
     public void run() {
         
@@ -162,8 +169,9 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
         }
     }
     
+    // UPDATE THE IMAGES IN THE GAME
     public void update() {
-        
+        // set the game state to play state 
         if (gameState == playState) {
             //PLAYER
             player.update();
@@ -174,9 +182,13 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
                     if (monster[i].alive == true && monster[i].dying == false) {
                         monster[i].update();
                     }
-                    if (monster[i].alive == false) {
+                    if (monster[i] != monster[4] && monster[i].alive == false) {
                         monster[i].checkDrop();
                         monster[i] = null;
+                    }
+                    if (monster[i] == monster[4] && monster[4].alive == false) {
+                        player.bossDefeated();
+                        monster[4] = null;
                     }
                 }
             }
@@ -199,7 +211,6 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
             tileM.draw(g2);
         
             // ADD ENTITIES TO THE LIST
-        
             entityList.add(player);
         
             for(int i = 0; i < obj.length; i++) {
@@ -214,7 +225,7 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
                 }
             }
         
-            // SORT
+            // SORT THE LIST
             Collections.sort(entityList, new Comparator<Entity>() {
                 @Override
                 public int compare(Entity e1, Entity e2) {
@@ -232,11 +243,12 @@ public class GameWorldPanel extends JPanel implements Runnable, KeyListener {
             // EMPTY EMTITY LIST
             entityList.clear();
             
-            // UI
+            // UI 
             ui.draw(g2);
         }
     }
     
+    // draw to the screen method
     public void drawToScreen() {
         
         Graphics g = getGraphics();

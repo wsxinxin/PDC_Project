@@ -17,11 +17,12 @@ import game.window.GameWorldPanel;
 public class CollisionChecker {
     
     GameWorldPanel gwp;
-
+    // Collision checker constructor
     public CollisionChecker(GameWorldPanel gwp) {
         this.gwp = gwp;
     }
     
+    // check if the tiles are solid if tiles are solid collision happens
     public void checkTile(Entity entity){
         
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
@@ -36,6 +37,7 @@ public class CollisionChecker {
         
         int tileNum1, tileNum2;
         
+        // define the hit box of the entity to check when it collides with some solid object
         switch(entity.direction) {
             
         case "up":
@@ -72,7 +74,7 @@ public class CollisionChecker {
             break; 
         }
     }
-    
+    // check object methods check when player collides with a object
     public int checkObject(Entity entity, boolean player) {
         
         int index = 999;
@@ -111,7 +113,7 @@ public class CollisionChecker {
         return index;
     }
     
-    // Monster collision
+    // Monster collision checks when player collides with a monster
     public int checkEntity(Entity entity, Entity[] target) {
         
         int index = 999;
@@ -147,7 +149,7 @@ public class CollisionChecker {
         }
         return index;
     }
-    
+    // check player check if some entity collides with the player
     public boolean checkPlayer(Entity entity) {
         
         boolean contactPlayer = false;

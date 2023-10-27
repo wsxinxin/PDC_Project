@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
  */
 
 public class Tile {
-    
+    // variables 
     public BufferedImage image;
     public boolean collision = false;   
 }

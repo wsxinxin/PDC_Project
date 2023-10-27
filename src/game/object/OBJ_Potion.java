@@ -17,7 +17,7 @@ import game.window.GameWorldPanel;
 public class OBJ_Potion extends Entity {
     
     GameWorldPanel gwp;
-    
+    // object potion constructor
     public OBJ_Potion(GameWorldPanel gwp) {
         super(gwp);
         
@@ -29,6 +29,7 @@ public class OBJ_Potion extends Entity {
         down1 = setup("objects/syringe_with_potion", gwp.tileSize, gwp.tileSize); 
         description = "[" + name + "]\n heal your life by " + value + ".";
     }
+    // Use methods uses the potion to add more life to the player
     @Override
     public boolean use(Entity entity) {
         

@@ -36,6 +36,7 @@ public class UI {
     public int slotRow = 0;
     public int subState = 0;
     
+    // UI constructor
     public UI(GameWorldPanel gwp) {
         this.gwp = gwp;
         
@@ -47,14 +48,14 @@ public class UI {
         heart_half = heart.image2;
         heart_empty = heart.image3;
     }
-    
+    // add message method
     public void addMessage(String text){
         
         message.add(text);
         messageCounter.add(0);
         
     }
-    
+    // draw each information of each game state
     public void draw(Graphics2D g2){
         this.g2 = g2;
         
@@ -93,6 +94,7 @@ public class UI {
             drawGameOverScreen();
         }
     }
+    // draw game over screen 
     public void drawGameOverScreen() {
         
         g2.setColor(new Color(0,0,0,150));
@@ -132,6 +134,7 @@ public class UI {
             g2.drawString(">", x-40, y);
         }
     }
+    // draw player life
     public void drawPlayerLife() {
         
         int x = gwp.tileSize/2;
@@ -161,6 +164,7 @@ public class UI {
             x += gwp.tileSize;        
         }
     }
+    // draw title screen (start screen)
     public void drawTitleScreen() {
         
         // TITLE NAME
@@ -209,6 +213,7 @@ public class UI {
         }
         
     }
+    // draw the pause screen
     public void drawPauseScreen() {
         
         String text = "PAUSED";
@@ -217,6 +222,7 @@ public class UI {
         
         g2.drawString(text, x, y);
     }
+    // draw the player inventory
     public void drawInventory() {
         
         // FRAME
@@ -280,6 +286,7 @@ public class UI {
             }
         }
     }
+    // draw option screen
     public void drawOptionsScreen() {
         
         g2.setColor(Color.white);
@@ -301,6 +308,7 @@ public class UI {
         
         gwp.keyH.enterPressed = false;
     }
+    // add the options functions
     public void options_top(int frameX, int frameY) {
         
         int textX;
@@ -383,6 +391,7 @@ public class UI {
         
        gwp.config.saveConfig();
     }
+    // add the options full screen notification
     public void options_fullScreenNotification(int frameX, int frameY) {
         
         int textX = frameX + gwp.tileSize;
@@ -405,6 +414,7 @@ public class UI {
             }
         }
     }
+    // add the controls information
     public void options_control(int frameX, int frameY) {
         int textX;
         int textY;
@@ -443,6 +453,7 @@ public class UI {
             }
         }
     }
+    // add the end game confirmation
     public void options_endGameConfirmation(int frameX, int frameY) {
         
         int textX = frameX + gwp.tileSize;
@@ -481,10 +492,12 @@ public class UI {
             }
         }
     }
+    // get the Item Index on the inventory slot
     public int getItemIndexOnSlot() {
         int itemIndex = slotCol + (slotRow*5);
         return itemIndex;
     } 
+    // draw the messages
     public void drawMessage() {
         int messageX = gwp.tileSize;
         int messageY = gwp.tileSize*4;
@@ -510,6 +523,7 @@ public class UI {
             }
         }
     }
+    // draw sub windows for the options, inventory etc.
     public void drawSubWindow(int x, int y, int width, int height) {
        
         g2.setColor(new Color (0,0,0, 210));
@@ -519,6 +533,7 @@ public class UI {
         g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25); 
     }
+    // make the text in center of the screen
     public int getXforCenteredText(String text) {
         
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();

@@ -28,7 +28,8 @@ public final class Player extends Entity{
     
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
-
+    
+    // Player constructor
     public Player(GameWorldPanel gwp, KeyHandler keyH) {
         super(gwp);
         this.keyH = keyH;
@@ -52,6 +53,7 @@ public final class Player extends Entity{
         getPlayerAttackImage();
         setItems();
     }
+    // set default player values
     public void setDefaultValues() {
         worldX = gwp.tileSize*18;
         worldY = gwp.tileSize*19;
@@ -62,22 +64,26 @@ public final class Player extends Entity{
         maxHP = 10;
         hp = maxHP;
     }
+    // set defaul position of the player
     public void setDefaultPositions() {
         worldX = gwp.tileSize*18;
         worldY = gwp.tileSize*19;
         direction = "down";
     }
+    // restore method
     public void restore() {
         
         hp = maxHP;
         invincible = false;
     }
+    // set default player items
     public void setItems() {
         
         inventory.clear();
         inventory.add(new OBJ_Potion(gwp));
         inventory.add(new OBJ_Potion(gwp));
     } 
+    // get Player movement sprites
     public void getPlayerImage(){
     
         up1 = setup("playersprites/Sprite-0001", gwp.tileSize, gwp.tileSize); 
@@ -95,7 +101,8 @@ public final class Player extends Entity{
         right1 = setup("playersprites/Sprite-0002", gwp.tileSize, gwp.tileSize);        
         right2 = setup("playersprites/Sprite-0007", gwp.tileSize, gwp.tileSize);        
         right3 = setup("playersprites/Sprite-0008", gwp.tileSize, gwp.tileSize);           
-    }    
+    }  
+    // get player Attack Sprites
     public void getPlayerAttackImage() {
         
         attackUp1 = setup("playersprites/attacking_up", gwp.tileSize, gwp.tileSize*2);
@@ -110,6 +117,7 @@ public final class Player extends Entity{
         attackRight1 = setup("playersprites/attacking_right", gwp.tileSize*2, gwp.tileSize);
         attackRight2 = setup("playersprites/attacking_right", gwp.tileSize*2, gwp.tileSize);
     }    
+    // update methods
     @Override
     public void update() {
         
@@ -191,6 +199,7 @@ public final class Player extends Entity{
             gwp.gameState = gwp.gameOverState;
         }
     }
+    // attacking methods
     public void attacking() {
         
         spriteCounter++;
@@ -234,6 +243,7 @@ public final class Player extends Entity{
             attacking = false;
         }
     }
+    // pickUpObject methods
     public void pickUpObject(int i) {
         
         if (i != 999) {
@@ -263,6 +273,14 @@ public final class Player extends Entity{
             }   
         }
     }
+    // Boss defeated method (when called displays the boss 
+    public void bossDefeated() {
+        
+        String text;
+        
+        text = "Congratulations you defeated the Boss, thanks for playing";
+        gwp.ui.addMessage(text);
+    }
     public void contactMonster(int i) {
         
         if (i != 999) {
@@ -271,6 +289,10 @@ public final class Player extends Entity{
                 hp -= 1;
                 invincible = true;
             }
+            if (invincible == false & gwp.monster[4].dying == false) {
+                hp -= 2;
+                invincible = true;
+            }         
         }
     }
     public void damageMonster(int i) {

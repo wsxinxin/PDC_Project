@@ -18,6 +18,7 @@ public class OBJ_Heart extends Entity {
     
     GameWorldPanel gwp;
     
+    // Object Heart constructor
     public OBJ_Heart(GameWorldPanel gwp) {
         super(gwp); 
         
@@ -31,6 +32,7 @@ public class OBJ_Heart extends Entity {
         image2 = setup("objects/heart_half", gwp.tileSize, gwp.tileSize);
         image3 = setup("objects/heart_empty", gwp.tileSize, gwp.tileSize);
     }
+    // Use methods uses the heart to add more life to the player
     @Override
     public boolean use(Entity entity) {
         gwp.ui.addMessage("Life +" + value);

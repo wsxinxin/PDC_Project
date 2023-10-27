@@ -18,7 +18,8 @@ public class KeyHandler implements KeyListener{
     GameWorldPanel gwp;
 
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
-
+    
+    // Key Handler constructor
     public KeyHandler(GameWorldPanel gwp) {
         this.gwp = gwp;
     }
@@ -26,7 +27,7 @@ public class KeyHandler implements KeyListener{
     @Override
     public void keyTyped(KeyEvent ke) {
     }
-
+    // key pressed according with each game state
     @Override
     public void keyPressed(KeyEvent ke) {
         
@@ -56,7 +57,7 @@ public class KeyHandler implements KeyListener{
             gameOverState(code);
         }
     }
-    
+    // title state keys
     public void titleState(int code) {
         
         if (code == KeyEvent.VK_W) {
@@ -83,6 +84,7 @@ public class KeyHandler implements KeyListener{
             }
         }
     }
+    // play state keys
     public void playState(int code) {
               
         if(code == KeyEvent.VK_W) {
@@ -111,11 +113,13 @@ public class KeyHandler implements KeyListener{
         } 
         
     }
+    // pause state keys
     public void pauseState(int code) {
         if(code == KeyEvent.VK_P) {                
             gwp.gameState = gwp.playState;
         }
     }
+    // character state (inventory) keys
     public void characterState(int code) {
         if(code == KeyEvent.VK_I) {                
             gwp.gameState = gwp.playState;
@@ -144,6 +148,7 @@ public class KeyHandler implements KeyListener{
             gwp.player.selectItem();
         }    
     }
+    // option state keys
     public void optionsState(int code) {
         
         if (code == KeyEvent.VK_ESCAPE) {
@@ -172,6 +177,7 @@ public class KeyHandler implements KeyListener{
             }
         }
     }
+    // game over state keys 
     public void gameOverState(int code) {
         
         if (code == KeyEvent.VK_W) {
@@ -197,7 +203,7 @@ public class KeyHandler implements KeyListener{
             }
         }
     }
-
+    // key released methods
     @Override
     public void keyReleased(KeyEvent ke) {
         

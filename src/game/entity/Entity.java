@@ -68,10 +68,11 @@ public class Entity {
     // ITEM ATTRIBUTES
     public String description = "";
     
-    // Constructor
+    // Entity constructor
     public Entity(GameWorldPanel gwp){
         this.gwp = gwp;
     }
+    //getters
     public int getLeftX() {
         return worldX + solidArea.x;
     }
@@ -90,11 +91,17 @@ public class Entity {
     public int getRow() {
         return (worldY + solidArea.y)/gwp.tileSize;
     }
+    // setAction method (being overrided)
     public void setAction() {}
+    // damagaReaction method (being overrided)
     public void damageReaction() {}
+    // interact method (being overrided)
     public void interact() {}
+    // use methods (being overrided)
     public boolean use(Entity entity) {return false;}
+    // checkDrop method (being overrided)
     public void checkDrop() {}
+    // dropItem method
     public void dropItem(Entity droppedItem) {
         
         for (int i = 0; i < gwp.obj.length; i++) {
@@ -105,7 +112,8 @@ public class Entity {
                 break;
             }
         }
-    }      
+    } 
+    // update the entities actions in the screen
     public void update() {
         
         setAction();
@@ -133,7 +141,7 @@ public class Entity {
                 case "right": worldX += speed; break;
             }
         }
-        
+        // counter for movement based in sprite changes
         spriteCounter++;
         if (spriteCounter > 12) {
             switch (spriteNum) {
@@ -160,7 +168,7 @@ public class Entity {
             }
         }
     }
-    
+    // detect entities (used for entities collisions)
     public int getDetected(Entity user, Entity target[], String targetName) {
         
         int index = 999;
@@ -187,7 +195,7 @@ public class Entity {
         }
         return index;
     }
-    
+    // draw method
     public void draw(Graphics2D g2) {
         
         BufferedImage image = null;
@@ -256,6 +264,7 @@ public class Entity {
             changeAlpha(g2, 1f);
         }
     }
+    // draw entity dying animation
     public void dyingAnimation(Graphics2D g2) {
         
         dyingCounter++;
@@ -274,11 +283,11 @@ public class Entity {
             alive = false;
         }
     }
-    
+    // change alpha method
     public void changeAlpha(Graphics2D g2, float alphaValue) {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
-    
+    // bufferedImages method
     public BufferedImage setup(String imageName, int width, int height){
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null; 

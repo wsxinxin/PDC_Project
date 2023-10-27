@@ -17,7 +17,7 @@ import game.window.GameWorldPanel;
 public class OBJ_Key extends Entity {
     
     GameWorldPanel gwp;
-    
+    // object key constructor
     public OBJ_Key(GameWorldPanel gwp) {
         super(gwp);  
         
@@ -28,6 +28,7 @@ public class OBJ_Key extends Entity {
         down1 = setup("objects/key", gwp.tileSize, gwp.tileSize);
         description = "[" + name + "]\n open the bridge's\n chains door";
     }
+    // use methods use the key to open the chain door
     @Override
     public boolean use(Entity entity) {
         

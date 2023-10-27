@@ -19,7 +19,7 @@ import java.util.Random;
 public class Monster extends Entity {
 
     GameWorldPanel gwp;
-    
+    // monster constructor
     public Monster(GameWorldPanel gwp) {
         super(gwp);
         
@@ -40,7 +40,7 @@ public class Monster extends Entity {
         
         getImage();
     }
-    
+    // get monster sprites
     public void getImage() {
         
         up1 = setup("monstersprites/Goons", gwp.tileSize, gwp.tileSize);
@@ -56,7 +56,7 @@ public class Monster extends Entity {
         right2 = setup("monstersprites/Goons-0001", gwp.tileSize, gwp.tileSize);
         right3 = setup("monstersprites/Goons-0002", gwp.tileSize, gwp.tileSize);
     }
-    
+    // set a basic monster AI movements
     @Override
     public void setAction() {
         
@@ -82,13 +82,14 @@ public class Monster extends Entity {
             actionLockCounter = 0;
         }
     }
-    
+     // damage Reaction method, give a basic reaction when monster is attacked
     @Override
     public void damageReaction() {
         
         actionLockCounter = 0;
         direction = gwp.player.direction;
     }
+    // check the monster drops
     @Override
     public void checkDrop() {
         
